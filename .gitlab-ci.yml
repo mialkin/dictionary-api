@@ -1,0 +1,19 @@
+stages:
+  - build
+  - test
+  - deploy
+
+build:
+  stage: build
+  script:
+    - echo "Building..."
+
+test:
+  stage: test
+  script:
+    - echo "Testing..."
+
+deploy:
+  stage: test
+  script:
+    - echo "Deploying..." # Consider using GitOps with Helm charts or something similar. https://about.gitlab.com/topics/gitops/
