@@ -21,8 +21,10 @@ build:
 test:
   stage: test
   interruptible: true
+  image: $DOTNET_SDK_IMAGE
   script:
-    - echo "Testing..."
+    - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+    - dotnet test --no-restore
 
 deploy:
   stage: deploy
