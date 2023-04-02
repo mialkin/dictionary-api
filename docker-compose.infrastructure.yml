@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15.2
+    container_name: dictionary-api-postgres
+    environment:
+      POSTGRES_DB: dictionary_api
+      POSTGRES_USER: dictionary_api
+      POSTGRES_PASSWORD: dictionary_api
+    ports:
+      - ${POSTGRES_PORT}:5432
