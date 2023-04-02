@@ -1,5 +1,6 @@
 variables:
   DOTNET_SDK_IMAGE: mcr.microsoft.com/dotnet/sdk:7.0
+  NUGET_PACKAGES_DIRECTORY: .nuget
 
 stages:
   - build
@@ -11,8 +12,12 @@ build:
   interruptible: true # https://docs.gitlab.com/ee/ci/yaml/#interruptible
   image: $DOTNET_SDK_IMAGE
   script:
-    - echo "Building..."
-
+    - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+    - dotnet build --no-restore --configuration Release
+  cache:
+    key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
+    paths:
+      - $NUGET_PACKAGES_DIRECTORY
 test:
   stage: test
   interruptible: true
