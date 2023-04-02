@@ -1,1 +1,11 @@
-# API for Dictionary application 
+# API for Dictionary application
+
+## Run application locally
+
+1. Run application's infrastructure:
+
+```bash
+docker-compose -f docker-compose.infrastructure.yml up
+```
+
+2. Open <http://localhost:2100> in web browser.
