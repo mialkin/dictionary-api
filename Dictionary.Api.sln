@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Infrastructure.Implementation.Database", "src\Dictionary.Api.Infrastructure.Implementation.Database\Dictionary.Api.Infrastructure.Implementation.Database.csproj", "{0E339F33-8F0B-447B-ACA3-D296CCAEE776}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Domain", "src\Dictionary.Api.Domain\Dictionary.Api.Domain.csproj", "{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -46,11 +48,16 @@ Global
 		{0E339F33-8F0B-447B-ACA3-D296CCAEE776}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0E339F33-8F0B-447B-ACA3-D296CCAEE776}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E339F33-8F0B-447B-ACA3-D296CCAEE776}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{23BD69E6-2942-4CCF-B8C3-EFFD3A180397} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{67529FEB-9814-41A8-AFDA-36B2AE87F0A6} = {5143AEAC-2B81-440C-9C7A-02E0D44D88CE}
 		{5AAB0073-9C88-4B46-A7E5-6D76247F486B} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{0E339F33-8F0B-447B-ACA3-D296CCAEE776} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
+		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 	EndGlobalSection
 EndGlobal
