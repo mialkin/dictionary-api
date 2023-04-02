@@ -7,12 +7,15 @@ stages:
   - test
   - deploy
 
+.restore_packages: &restore_packages
+  - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+
 build:
   stage: build
   interruptible: true # https://docs.gitlab.com/ee/ci/yaml/#interruptible
   image: $DOTNET_SDK_IMAGE
   script:
-    - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+    - *restore_packages
     - dotnet build --no-restore --configuration Release
   cache:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
@@ -23,7 +26,7 @@ test:
   interruptible: true
   image: $DOTNET_SDK_IMAGE
   script:
-    - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
+    - *restore_packages
     - dotnet test --no-restore
 
 deploy:
