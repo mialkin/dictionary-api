@@ -1,3 +1,6 @@
+variables:
+  DOTNET_SDK_IMAGE: mcr.microsoft.com/dotnet/sdk:7.0
+
 stages:
   - build
   - test
@@ -5,11 +8,14 @@ stages:
 
 build:
   stage: build
+  interruptible: true # https://docs.gitlab.com/ee/ci/yaml/#interruptible
+  image: $DOTNET_SDK_IMAGE
   script:
     - echo "Building..."
 
 test:
   stage: test
+  interruptible: true
   script:
     - echo "Testing..."
 
