@@ -1,4 +1,4 @@
-# API for Dictionary application
+# Dictionary API
 
 ## Run application locally
 
