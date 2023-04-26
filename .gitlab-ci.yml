@@ -1,13 +1,14 @@
 variables:
   DOTNET_SDK_IMAGE: mcr.microsoft.com/dotnet/sdk:7.0
   NUGET_PACKAGES_DIRECTORY: .nuget
+  DOCKER_IMAGE_NAME: mialkin/dictionary-api
 
 stages:
   - build
   - test
-  - deploy
+  - publish
 
-.restore_packages: &restore_packages
+.restore_packages: &restore_nuget_packages
   - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
 
 build:
@@ -15,7 +16,7 @@ build:
   interruptible: true # https://docs.gitlab.com/ee/ci/yaml/#interruptible
   image: $DOTNET_SDK_IMAGE
   script:
-    - *restore_packages
+    - *restore_nuget_packages
     - dotnet build --no-restore --configuration Release
   cache:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
@@ -26,10 +27,15 @@ test:
   interruptible: true
   image: $DOTNET_SDK_IMAGE
   script:
-    - *restore_packages
+    - *restore_nuget_packages
     - dotnet test --no-restore
 
-deploy:
-  stage: deploy
+publish:
+  stage: publish
   script:
-    - echo "Deploying..." # Consider using GitOps with Helm charts or something similar. https://about.gitlab.com/topics/gitops/
+    - docker build -t ${DOCKER_IMAGE_NAME}:latest .
+#    - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
+#    - docker push ${DOCKER_IMAGE_NAME}:latest
+#    - docker logout ${CI_REGISTRY}
+
+# https://stackoverflow.com/questions/45517733/how-to-publish-docker-images-to-docker-hub-from-gitlab-ci
