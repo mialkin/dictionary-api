@@ -32,6 +32,9 @@ test:
 
 publish:
   stage: publish
+  image: docker:stable
+  services:
+    - docker:dind
   script:
     - docker build -t ${DOCKER_IMAGE_NAME}:latest .
 #    - docker login ${CI_REGISTRY} -u ${CI_REGISTRY_USER} -p ${CI_REGISTRY_PASSWORD}
