@@ -41,3 +41,5 @@ publish:
     - docker login --username ${DOCKER_REGISTRY_USERNAME} --password ${DOCKER_REGISTRY_PASSWORD}
     - docker push ${DOCKER_IMAGE_NAME}:latest
     - docker logout ${CI_REGISTRY}
+
+# Publish migration Docker image in the same stage in parallel
