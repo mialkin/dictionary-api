@@ -36,6 +36,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dictionary-api-agent", "dic
 		.gitlab\agents\dictionary-api-agent\config.yaml = .gitlab\agents\dictionary-api-agent\config.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manifests", "manifests", "{44836C42-C722-41D1-8B7F-E3FB9EB41CE0}"
+	ProjectSection(SolutionItems) = preProject
+		deploy\manifests\namespace.yml = deploy\manifests\namespace.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -72,5 +79,7 @@ Global
 		{AB1172F3-2A13-4555-870C-74CC6B1E9E6D} = {A21FD387-3AC4-4487-8C16-54DBF3C87FA8}
 		{63F337BE-498C-4F63-B655-3A19B079B714} = {AB1172F3-2A13-4555-870C-74CC6B1E9E6D}
 		{BD02B10A-5F81-4F13-A43D-88C660368DDE} = {63F337BE-498C-4F63-B655-3A19B079B714}
+		{08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D} = {A21FD387-3AC4-4487-8C16-54DBF3C87FA8}
+		{44836C42-C722-41D1-8B7F-E3FB9EB41CE0} = {08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D}
 	EndGlobalSection
 EndGlobal
