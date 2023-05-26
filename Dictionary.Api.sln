@@ -34,6 +34,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manifests", "manifests", "{
 		deploy\manifests\namespace.yml = deploy\manifests\namespace.yml
 		deploy\manifests\deployment.yml = deploy\manifests\deployment.yml
 		deploy\manifests\service.yml = deploy\manifests\service.yml
+		deploy\manifests\kustomization.yaml = deploy\manifests\kustomization.yaml
 	EndProjectSection
 EndProject
 Global
