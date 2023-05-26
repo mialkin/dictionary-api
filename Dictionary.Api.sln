@@ -32,6 +32,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manifests", "manifests", "{44836C42-C722-41D1-8B7F-E3FB9EB41CE0}"
 	ProjectSection(SolutionItems) = preProject
 		deploy\manifests\namespace.yml = deploy\manifests\namespace.yml
+		deploy\manifests\deployment.yml = deploy\manifests\deployment.yml
+		deploy\manifests\service.yml = deploy\manifests\service.yml
 	EndProjectSection
 EndProject
 Global

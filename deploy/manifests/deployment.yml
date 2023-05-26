@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dictionary-api
+  namespace: mialkin
+  labels:
+    app: dictionary-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dictionary-api
+  template:
+    metadata:
+      namespace: mialkin
+      labels:
+        app: dictionary-api
+        version: "1.0"
+    spec:
+      containers:
+        - name: dictionary-api
+          image: mialkin/dictionary-api
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
