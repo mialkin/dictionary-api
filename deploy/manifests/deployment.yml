@@ -15,11 +15,9 @@ spec:
       namespace: mialkin
       labels:
         app: dictionary-api
-        version: "1.0"
     spec:
       containers:
         - name: dictionary-api
-          image: mialkin/dictionary-api
-          imagePullPolicy: Always
+          image: mialkin/dictionary-api:latest
           ports:
             - containerPort: 80
