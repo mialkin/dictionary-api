@@ -15,10 +15,9 @@ docker run \
 --detach \
 --interactive \
 --tty \
---publish 2100:5000 \
+--publish 2100:80 \
 --name dictionary-api \
 mialkin/dictionary-api
 ```
 
 3\. Navigate to <http://localhost:2100> in your web browser.
-
