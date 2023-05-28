@@ -9,3 +9,4 @@ RUN dotnet publish \
 FROM mcr.microsoft.com/dotnet/aspnet:7.0
 WORKDIR /application
 COPY --from=build-environment /application/release .
+ENTRYPOINT ["./Dictionary.Api"]
