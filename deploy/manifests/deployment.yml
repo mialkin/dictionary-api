@@ -18,6 +18,7 @@ spec:
     spec:
       containers:
         - name: dictionary-api
+          imagePullPolicy: Always
           image: mialkin/dictionary-api:latest
           ports:
             - containerPort: 80
