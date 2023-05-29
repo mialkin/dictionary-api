@@ -7,7 +7,9 @@ public class Word
     /// <summary>
     /// Internal constructor for ORM
     /// </summary>
+#pragma warning disable CS8618
     internal Word()
+#pragma warning restore CS8618
     {
     }
 
