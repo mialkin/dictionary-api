@@ -12,4 +12,10 @@ public class WordsController : ControllerBase
     {
         return Ok("List of words " + DateTime.Now);
     }
+
+    [HttpDelete("delete")]
+    public IActionResult Delete()
+    {
+        return Ok("Word deleted " + DateTime.Now);
+    }
 }
