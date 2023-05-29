@@ -18,4 +18,10 @@ public class WordsController : ControllerBase
     {
         return Ok("Word deleted " + DateTime.Now);
     }
+
+    [HttpDelete("update")]
+    public IActionResult Update()
+    {
+        return Ok("Word updated " + DateTime.Now);
+    }
 }
