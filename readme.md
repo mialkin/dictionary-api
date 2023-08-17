@@ -8,7 +8,11 @@
 docker-compose -f docker-compose.infrastructure.yml up
 ```
 
-2\. Run application either in IDE  by running `Dicrionary.Api` project in Rider or run it in Docker:
+2\. Run application in one of these ways:
+
+2\.1 In IDE, by launching `Dicrionary.Api` project
+
+2\.2 In Docker, by running command:
 
 ```bash
 docker run \
