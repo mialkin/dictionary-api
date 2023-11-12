@@ -7,3 +7,5 @@ public interface IReadOnlyDatabaseContext
 {
     DbSet<Word> Words { get; }
 }
+
+// https://github.com/vkhorikov/CSharpFunctionalExtensions
