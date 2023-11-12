@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Dictionary.Api.Domain.Entities;
+﻿namespace Dictionary.Api.Domain.Entities;
 
 public class Word
 {

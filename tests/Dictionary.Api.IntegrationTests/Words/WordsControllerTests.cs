@@ -1,5 +1,4 @@
 using System.Net;
-using System.Threading.Tasks;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using FluentAssertions;
 using Flurl;
