@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Dictionary.Api.Words;
+namespace Dictionary.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
