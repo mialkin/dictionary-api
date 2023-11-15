@@ -1,15 +1,19 @@
+using Dictionary.UseCases.Words.Queries.GetWords;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WordsController : ControllerBase
+public class WordsController : ApiControllerBase
 {
-    [HttpGet("list")]
-    public IActionResult List()
+    [HttpGet("Get")]
+    public async Task<IActionResult> Get([FromQuery] int languageId, string? term, CancellationToken cancellationToken)
     {
-        return Ok("List of words " + DateTime.Now);
+        // TODO Return SuccessResponse with request ID, i.e. trace ID
+        var result = await Sender.Send(new GetWordsQuery(languageId, term), cancellationToken);
+
+        return Ok(result);
     }
 
     [HttpPost("create")]
