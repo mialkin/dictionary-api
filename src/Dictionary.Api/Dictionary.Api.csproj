@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Dictionary.Api.Infrastructure.Implementation.Database\Dictionary.Api.Infrastructure.Implementation.Database.csproj" />
     <ProjectReference Include="..\Dictionary.Controllers\Dictionary.Controllers.csproj" />
   </ItemGroup>
 

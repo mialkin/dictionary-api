@@ -1,11 +1,10 @@
 using Dictionary.Api.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.Infrastructure.Interfaces.Database;
 
 public interface IReadOnlyDatabaseContext
 {
-    DbSet<Word> Words { get; }
-}
+    IQueryable<Word> Words { get; }
 
-// https://github.com/vkhorikov/CSharpFunctionalExtensions
+    // TODO Implement master-slave replication
+}

@@ -1,7 +1,7 @@
 using Dictionary.UseCases.Words.Queries.GetWords;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dictionary.UseCases.Configuration;
+namespace Dictionary.UseCases.Configurations;
 
 public static class MediatrConfiguration
 {

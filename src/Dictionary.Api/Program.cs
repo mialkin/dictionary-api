@@ -1,4 +1,4 @@
-using Dictionary.UseCases.Configuration;
+using Dictionary.Api.Configurations;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +15,7 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 services.AddRouting(options => options.LowercaseUrls = true);
-services.ConfigureMediatr();
+services.ConfigureApplication();
 
 var application = builder.Build();
 
@@ -32,6 +32,8 @@ application.UseRouting();
 application.MapControllers();
 
 application.Run();
+
+// TODO Replace Makefile with bash.sh
 
 public partial class Program
 {

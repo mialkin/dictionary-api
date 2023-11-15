@@ -1,6 +1,6 @@
 ﻿namespace Dictionary.Api.Domain.Entities;
 
-public class Word
+public class Word : AuditableEntity
 {
     /// <summary>
     /// Internal constructor for ORM
@@ -11,15 +11,15 @@ public class Word
     {
     }
 
-    public Word(Guid id, string name, string translation, string transcription)
+    public Word(int languageId, string name, string translation, string transcription)
     {
-        Id = id;
+        LanguageId = languageId;
         Name = name;
         Translation = translation;
         Transcription = transcription;
     }
 
-    public Guid Id { get; private set; } // TODO remove?
+    public int LanguageId { get; private set; }
     public string Name { get; private set; }
     public string Translation { get; private set; }
     public string Transcription { get; private set; }
