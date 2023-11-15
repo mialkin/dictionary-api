@@ -16,3 +16,7 @@ shutdown-infrastructure:
 .PHONY: migrate-database
 migrate-database:
 	dotnet ef database update --startup-project src/${MIGRATE_STARTUP_PROJECT_KEY} --project src/${MIGRATE_PROJECT_KEY}
+
+.PHONY: add-migration
+add-migration:
+	dotnet ef migrations add Add_Words_Table --startup-project src/${MIGRATE_STARTUP_PROJECT_KEY} --project src/${MIGRATE_PROJECT_KEY}

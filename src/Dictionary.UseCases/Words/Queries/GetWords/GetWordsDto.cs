@@ -5,6 +5,5 @@ public record GetWordsDto(
     string Name,
     string? Transcription,
     string Translation,
-    string? Gender,
     DateTime CreatedAt,
     DateTime? UpdatedAt);
