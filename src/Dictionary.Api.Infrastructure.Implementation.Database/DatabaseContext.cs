@@ -16,7 +16,7 @@ internal class DatabaseContext : DbContext, IDatabaseContext
     {
     }
 
-    // TODO Add Languages table seeding. Use InMemoryCache
+    // TODO Add Languages table seeding. Use InMemoryCache for retrieving languages
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         var utcNow = DateTime.UtcNow; // TODO Replace with ISystemClock?
@@ -40,5 +40,19 @@ internal class DatabaseContext : DbContext, IDatabaseContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new WordEntityTypeConfiguration());
+
+        // SeedWords(modelBuilder); TODO Make it work https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
     }
+
+    private static void SeedWords(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Word>().HasData(
+            CreateWord(1, "apple", "яблоко", null),
+            CreateWord(1, "orange", "апельсин", null),
+            CreateWord(1, "banana", "банан", "bə'nɑːnə")
+        );
+    }
+
+    private static Word CreateWord(int languageId, string name, string translation, string? transcription) =>
+        new(languageId, name, translation, transcription);
 }

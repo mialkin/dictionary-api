@@ -11,7 +11,7 @@ public class Word : AuditableEntity
     {
     }
 
-    public Word(int languageId, string name, string translation, string transcription)
+    public Word(int languageId, string name, string translation, string? transcription)
     {
         LanguageId = languageId;
         Name = name;
@@ -22,5 +22,5 @@ public class Word : AuditableEntity
     public int LanguageId { get; private set; }
     public string Name { get; private set; }
     public string Translation { get; private set; }
-    public string Transcription { get; private set; }
+    public string? Transcription { get; private set; }
 }
