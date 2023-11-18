@@ -23,4 +23,10 @@ public class Word : AuditableEntity
     public string Name { get; private set; }
     public string? Transcription { get; private set; }
     public string Translation { get; private set; }
+
+    public void Update(string? transcription, string translation)
+    {
+        Transcription = transcription;
+        Translation = translation;
+    }
 }
