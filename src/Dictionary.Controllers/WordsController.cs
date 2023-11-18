@@ -1,4 +1,5 @@
 using Dictionary.UseCases.Words.Commands.CreateWord;
+using Dictionary.UseCases.Words.Commands.DeleteWord;
 using Dictionary.UseCases.Words.Queries.GetWords;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,9 +32,12 @@ public class WordsController : ApiControllerBase
         return Ok("Word updated " + DateTime.Now);
     }
 
-    [HttpDelete("delete")]
-    public IActionResult Delete()
+    [HttpPost("delete")]
+    public async Task<IActionResult> Delete([FromBody] DeleteWordDto deleteWordDto, CancellationToken cancellationToken)
     {
-        return Ok("Word deleted " + DateTime.Now);
+        await Sender.Send(new DeleteWordCommand(deleteWordDto), cancellationToken);
+
+        // TODO Return different responses based on outcomes of operations
+        return Ok();
     }
 }
