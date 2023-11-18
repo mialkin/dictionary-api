@@ -20,25 +20,25 @@ public class WordsController : ApiControllerBase
     }
 
     [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] CreateWordDto createWordDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromBody] CreateWordDto dto, CancellationToken cancellationToken)
     {
-        await Sender.Send(new CreateWordCommand(createWordDto), cancellationToken);
+        await Sender.Send(new CreateWordCommand(dto), cancellationToken);
 
         return Ok();
     }
 
     [HttpPatch("update")]
-    public async Task<IActionResult> Update([FromBody] UpdateWordDto updateWordDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromBody] UpdateWordDto dto, CancellationToken cancellationToken)
     {
-        await Sender.Send(new UpdateWordCommand(updateWordDto), cancellationToken);
+        await Sender.Send(new UpdateWordCommand(dto), cancellationToken);
 
         return Ok();
     }
 
     [HttpDelete("delete")]
-    public async Task<IActionResult> Delete([FromBody] DeleteWordDto deleteWordDto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromBody] DeleteWordDto dto, CancellationToken cancellationToken)
     {
-        await Sender.Send(new DeleteWordCommand(deleteWordDto), cancellationToken);
+        await Sender.Send(new DeleteWordCommand(dto), cancellationToken);
 
         // TODO Return different responses based on outcomes of operations
         return Ok();
