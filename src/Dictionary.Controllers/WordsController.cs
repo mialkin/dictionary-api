@@ -1,10 +1,8 @@
-using CSharpFunctionalExtensions;
 using Dictionary.UseCases.Words.Commands.CreateWord;
 using Dictionary.UseCases.Words.Commands.DeleteWord;
 using Dictionary.UseCases.Words.Commands.UpdateWord;
 using Dictionary.UseCases.Words.Queries.GetWord;
 using Dictionary.UseCases.Words.Queries.GetWords;
-using Dictionary.Utilities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Controllers;
@@ -27,11 +25,7 @@ public class WordsController : ApiControllerBase
         CancellationToken cancellationToken)
     {
         var result = await Sender.Send(new GetWordQuery(languageId, name), cancellationToken);
-
-        if (result.HasValue)
-            return Ok(Envelope.Ok(result.Value));
-
-        return Ok(Envelope.Error("Word not found"));
+        return Ok(result.Value);
     }
 
     [HttpPatch("update")]
