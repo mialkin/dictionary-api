@@ -18,6 +18,7 @@ internal class GetWordsQueryHandler : IRequestHandler<GetWordsQuery, IReadOnlyCo
         // TODO Use https://github.com/vkhorikov/CSharpFunctionalExtensions
 
         var queryable = _readOnlyDatabaseContext.Words;
+        // TODO Use Elasticsearch for storing words and translations?
 
         var words = await queryable
             .Where(x => x.LanguageId == request.LanguageId)

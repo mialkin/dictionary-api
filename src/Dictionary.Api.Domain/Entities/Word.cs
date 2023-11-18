@@ -11,16 +11,16 @@ public class Word : AuditableEntity
     {
     }
 
-    public Word(int languageId, string name, string translation, string? transcription)
+    public Word(int languageId, string name, string? transcription, string translation)
     {
         LanguageId = languageId;
         Name = name;
-        Translation = translation;
         Transcription = transcription;
+        Translation = translation;
     }
 
     public int LanguageId { get; private set; }
     public string Name { get; private set; }
-    public string Translation { get; private set; }
     public string? Transcription { get; private set; }
+    public string Translation { get; private set; }
 }
