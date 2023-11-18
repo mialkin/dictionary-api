@@ -2,6 +2,7 @@ using Dictionary.Api.Domain;
 using Dictionary.Api.Domain.Entities;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using Dictionary.Api.Infrastructure.Interfaces.Database.EntityTypeConfigurations;
+using Dictionary.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.Infrastructure.Implementation.Database;

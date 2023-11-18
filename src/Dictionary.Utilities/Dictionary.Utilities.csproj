@@ -7,8 +7,4 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Dictionary.Utilities\Dictionary.Utilities.csproj" />
-  </ItemGroup>
-
 </Project>

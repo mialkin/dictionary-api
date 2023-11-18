@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using AutoFixture.Xunit2;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using Dictionary.UseCases.Words.Commands.CreateWord;
+using Dictionary.UseCases.Words.Queries.GetWords;
 using FluentAssertions;
 using Flurl;
 using Xunit;
@@ -25,13 +26,24 @@ public class WordsControllerTests : IClassFixture<WordsControllerWebApplicationF
     {
         // Arrange
         var client = _factory.CreateClient();
-        var url = BasePath.AppendPathSegment(CreateSegment);
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
+        var listUri = BasePath
+            .AppendPathSegment(ListSegment)
+            .SetQueryParams(new
+            {
+                LanguageId = dto.LanguageId,
+                Term = dto.Name
+            })
+            .SetQueryParam("languageId", dto.LanguageId);
 
         // Act
-        var response = await client.PostAsJsonAsync(url, dto);
+        var createResponse = await client.PostAsJsonAsync(createUri, dto);
+        var listResponse = await client.GetFromJsonAsync<IReadOnlyCollection<GetWordsDto>>(listUri);
 
         // Assert.
-        response.StatusCode.Should().Be(HttpStatusCode.OK);
+        createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        listResponse.Should().ContainSingle();
+        listResponse!.First().Should().BeEquivalentTo(dto);
     }
 
     [Fact]

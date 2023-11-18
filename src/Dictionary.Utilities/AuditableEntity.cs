@@ -1,6 +1,6 @@
-namespace Dictionary.Api.Domain;
+namespace Dictionary.Utilities;
 
-public abstract class AuditableEntity // TODO Move this class to another DLL?
+public abstract class AuditableEntity
 {
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }

@@ -41,6 +41,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.UseCases", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Controllers", "src\Dictionary.Controllers\Dictionary.Controllers.csproj", "{51C6AF08-34FD-4419-92ED-6E487E894966}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Utilities", "src\Dictionary.Utilities\Dictionary.Utilities.csproj", "{017F1C3E-1FA2-4984-8A32-E77482384252}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{51C6AF08-34FD-4419-92ED-6E487E894966}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51C6AF08-34FD-4419-92ED-6E487E894966}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51C6AF08-34FD-4419-92ED-6E487E894966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{017F1C3E-1FA2-4984-8A32-E77482384252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{017F1C3E-1FA2-4984-8A32-E77482384252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{017F1C3E-1FA2-4984-8A32-E77482384252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{017F1C3E-1FA2-4984-8A32-E77482384252}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{23BD69E6-2942-4CCF-B8C3-EFFD3A180397} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
@@ -86,5 +92,6 @@ Global
 		{44836C42-C722-41D1-8B7F-E3FB9EB41CE0} = {08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D}
 		{B788695B-7336-4E95-BE54-C9C5276858C5} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{51C6AF08-34FD-4419-92ED-6E487E894966} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
+		{017F1C3E-1FA2-4984-8A32-E77482384252} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 	EndGlobalSection
 EndGlobal

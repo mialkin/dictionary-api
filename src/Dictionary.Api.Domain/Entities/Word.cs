@@ -1,4 +1,6 @@
-﻿namespace Dictionary.Api.Domain.Entities;
+﻿using Dictionary.Utilities;
+
+namespace Dictionary.Api.Domain.Entities;
 
 public class Word : AuditableEntity
 {
