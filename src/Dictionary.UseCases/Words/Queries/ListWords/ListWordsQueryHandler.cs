@@ -2,17 +2,17 @@ using Dictionary.Api.Infrastructure.Interfaces.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dictionary.UseCases.Words.Queries.GetWords;
+namespace Dictionary.UseCases.Words.Queries.ListWords;
 
-internal class GetWordsQueryHandler : IRequestHandler<GetWordsQuery, IReadOnlyCollection<GetWordsDto>>
+internal class ListWordsQueryHandler : IRequestHandler<ListWordsQuery, IReadOnlyCollection<ListWordsDto>>
 {
     private readonly IReadOnlyDatabaseContext _readOnlyDatabaseContext;
 
-    public GetWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext) =>
+    public ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext) =>
         _readOnlyDatabaseContext = readOnlyDatabaseContext;
 
-    public async Task<IReadOnlyCollection<GetWordsDto>> Handle(
-        GetWordsQuery request,
+    public async Task<IReadOnlyCollection<ListWordsDto>> Handle(
+        ListWordsQuery request,
         CancellationToken cancellationToken)
     {
         // TODO Use https://github.com/vkhorikov/CSharpFunctionalExtensions
@@ -23,7 +23,7 @@ internal class GetWordsQueryHandler : IRequestHandler<GetWordsQuery, IReadOnlyCo
         var words = await queryable
             .Where(x => x.LanguageId == request.LanguageId)
             .Select(x =>
-                new GetWordsDto(
+                new ListWordsDto(
                     x.LanguageId,
                     x.Name,
                     x.Transcription,

@@ -3,7 +3,7 @@ using System.Net.Http.Json;
 using AutoFixture.Xunit2;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using Dictionary.UseCases.Words.Commands.CreateWord;
-using Dictionary.UseCases.Words.Queries.GetWords;
+using Dictionary.UseCases.Words.Queries.ListWords;
 using FluentAssertions;
 using Flurl;
 using Xunit;
@@ -38,7 +38,7 @@ public class WordsControllerTests : IClassFixture<WordsControllerWebApplicationF
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, dto);
-        var listResponse = await client.GetFromJsonAsync<IReadOnlyCollection<GetWordsDto>>(listUri);
+        var listResponse = await client.GetFromJsonAsync<IReadOnlyCollection<ListWordsDto>>(listUri);
 
         // Assert.
         createResponse.StatusCode.Should().Be(HttpStatusCode.OK);

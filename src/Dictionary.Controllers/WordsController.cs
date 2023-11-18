@@ -2,7 +2,7 @@ using Dictionary.UseCases.Words.Commands.CreateWord;
 using Dictionary.UseCases.Words.Commands.DeleteWord;
 using Dictionary.UseCases.Words.Commands.UpdateWord;
 using Dictionary.UseCases.Words.Queries.GetWord;
-using Dictionary.UseCases.Words.Queries.GetWords;
+using Dictionary.UseCases.Words.Queries.ListWords;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Controllers;
@@ -52,7 +52,7 @@ public class WordsController : ApiControllerBase
         CancellationToken cancellationToken)
     {
         // TODO Return SuccessResponse with request ID, i.e. trace ID
-        var result = await Sender.Send(new GetWordsQuery(languageId, term), cancellationToken);
+        var result = await Sender.Send(new ListWordsQuery(languageId, term), cancellationToken);
         return Ok(result);
     }
 }

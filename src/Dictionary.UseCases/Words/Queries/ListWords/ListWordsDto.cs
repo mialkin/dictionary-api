@@ -1,6 +1,6 @@
-namespace Dictionary.UseCases.Words.Queries.GetWords;
+namespace Dictionary.UseCases.Words.Queries.ListWords;
 
-public record GetWordsDto(
+public record ListWordsDto(
     int LanguageId,
     string Name,
     string? Transcription,
