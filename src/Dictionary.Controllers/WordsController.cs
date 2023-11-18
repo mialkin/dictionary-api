@@ -46,13 +46,13 @@ public class WordsController : ApiControllerBase
     }
 
     [HttpGet("list")]
-    public async Task<IReadOnlyCollection<GetWordsDto>> List(
+    public async Task<IActionResult> List(
         [FromQuery] int languageId,
         [FromQuery] string? term,
         CancellationToken cancellationToken)
     {
         // TODO Return SuccessResponse with request ID, i.e. trace ID
         var result = await Sender.Send(new GetWordsQuery(languageId, term), cancellationToken);
-        return result;
+        return Ok(result);
     }
 }
