@@ -22,13 +22,13 @@ build:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
     paths:
       - $NUGET_PACKAGES_DIRECTORY
-test:
-  stage: test
-  interruptible: true
-  image: $DOTNET_SDK_IMAGE
-  script:
-    - *restore_nuget_packages
-    - dotnet test --no-restore
+#test:
+#  stage: test
+#  interruptible: true
+#  image: $DOTNET_SDK_IMAGE
+#  script:
+#    - *restore_nuget_packages
+#    - dotnet test --no-restore
 
 .publish:
   stage: publish

@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="CSharpFunctionalExtensions" Version="2.40.3" />
-    <PackageReference Include="MediatR" Version="12.1.1" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.40.3"/>
+    <PackageReference Include="MediatR" Version="12.1.1"/>
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dictionary.Api.Infrastructure.Interfaces.Database\Dictionary.Api.Infrastructure.Interfaces.Database.csproj" />
+    <ProjectReference Include="..\Dictionary.Api.Infrastructure.Interfaces.Database\Dictionary.Api.Infrastructure.Interfaces.Database.csproj"/>
   </ItemGroup>
 
 </Project>
