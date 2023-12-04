@@ -1,4 +1,5 @@
 using Dictionary.Api.Configurations;
+using Dictionary.Api.Metrics;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,7 @@ services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 services.AddRouting(options => options.LowercaseUrls = true);
 services.ConfigureApplication();
+services.ConfigureMetrics();
 
 var application = builder.Build();
 
@@ -30,6 +32,7 @@ application.UseSwaggerUI(options =>
 
 application.UseRouting();
 application.MapControllers();
+application.UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
 application.Run();
 
