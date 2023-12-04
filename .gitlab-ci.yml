@@ -1,5 +1,5 @@
 variables:
-  DOTNET_SDK_IMAGE: mcr.microsoft.com/dotnet/sdk:7.0
+  DOTNET_SDK_IMAGE: mcr.microsoft.com/dotnet/sdk:8.0
   NUGET_PACKAGES_DIRECTORY: .nuget
   DOCKER_IMAGE_NAME: mialkin/dictionary-api
 
