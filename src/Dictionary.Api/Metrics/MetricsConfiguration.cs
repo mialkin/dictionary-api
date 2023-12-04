@@ -16,6 +16,9 @@ public static class MetricsConfiguration
             .WithMetrics(x =>
             {
                 x.SetResourceBuilder(resourceBuilder);
+                x.AddRuntimeInstrumentation(); // Requires OpenTelemetry.Instrumentation.Runtime
+                x.AddAspNetCoreInstrumentation(); // Requires OpenTelemetry.Instrumentation.AspNetCore --prerelease
+                x.AddHttpClientInstrumentation(); // Requires OpenTelemetry.Instrumentation.Http
                 x.AddPrometheusExporter(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore
                 x.AddMeter(defaultMeterName);
             });
