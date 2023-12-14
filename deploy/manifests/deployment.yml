@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
         - name: dictionary-api
-          image: mialkin/dictionary-api
+          image: mialkin/dictionary-api:1.0.0
           ports:
             - containerPort: 80

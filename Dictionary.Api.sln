@@ -27,16 +27,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Domain", "src\Dictionary.Api.Domain\Dictionary.Api.Domain.csproj", "{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "deploy", "deploy", "{08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "manifests", "manifests", "{44836C42-C722-41D1-8B7F-E3FB9EB41CE0}"
-	ProjectSection(SolutionItems) = preProject
-		deploy\manifests\namespace.yml = deploy\manifests\namespace.yml
-		deploy\manifests\deployment.yml = deploy\manifests\deployment.yml
-		deploy\manifests\service.yml = deploy\manifests\service.yml
-		deploy\manifests\kustomization.yaml = deploy\manifests\kustomization.yaml
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.UseCases", "src\Dictionary.UseCases\Dictionary.UseCases.csproj", "{B788695B-7336-4E95-BE54-C9C5276858C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Controllers", "src\Dictionary.Controllers\Dictionary.Controllers.csproj", "{51C6AF08-34FD-4419-92ED-6E487E894966}"
@@ -88,8 +78,6 @@ Global
 		{5AAB0073-9C88-4B46-A7E5-6D76247F486B} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{0E339F33-8F0B-447B-ACA3-D296CCAEE776} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
-		{08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D} = {A21FD387-3AC4-4487-8C16-54DBF3C87FA8}
-		{44836C42-C722-41D1-8B7F-E3FB9EB41CE0} = {08E63AE2-8D2E-4515-9E2D-C2CA02E6CC4D}
 		{B788695B-7336-4E95-BE54-C9C5276858C5} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{51C6AF08-34FD-4419-92ED-6E487E894966} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
 		{017F1C3E-1FA2-4984-8A32-E77482384252} = {6B76B842-E129-45D2-AEAE-645C018B0E00}
