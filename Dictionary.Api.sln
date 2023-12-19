@@ -27,11 +27,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Domain", "src\Dictionary.Api.Domain\Dictionary.Api.Domain.csproj", "{3F15D9DA-850C-4406-ADA1-BA51BC5EBC81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.UseCases", "src\Dictionary.UseCases\Dictionary.UseCases.csproj", "{B788695B-7336-4E95-BE54-C9C5276858C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.UseCases", "src\Dictionary.Api.UseCases\Dictionary.Api.UseCases.csproj", "{B788695B-7336-4E95-BE54-C9C5276858C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Controllers", "src\Dictionary.Controllers\Dictionary.Controllers.csproj", "{51C6AF08-34FD-4419-92ED-6E487E894966}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Controllers", "src\Dictionary.Api.Controllers\Dictionary.Api.Controllers.csproj", "{51C6AF08-34FD-4419-92ED-6E487E894966}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Utilities", "src\Dictionary.Utilities\Dictionary.Utilities.csproj", "{017F1C3E-1FA2-4984-8A32-E77482384252}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary.Api.Utilities", "src\Dictionary.Api.Utilities\Dictionary.Api.Utilities.csproj", "{017F1C3E-1FA2-4984-8A32-E77482384252}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

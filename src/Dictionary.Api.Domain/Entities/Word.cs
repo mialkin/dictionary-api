@@ -1,4 +1,4 @@
-﻿using Dictionary.Utilities;
+﻿using Dictionary.Api.Utilities;
 
 namespace Dictionary.Api.Domain.Entities;
 

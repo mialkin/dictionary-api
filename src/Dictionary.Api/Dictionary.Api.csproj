@@ -24,7 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Dictionary.Api.Infrastructure.Implementation.Database\Dictionary.Api.Infrastructure.Implementation.Database.csproj"/>
-    <ProjectReference Include="..\Dictionary.Controllers\Dictionary.Controllers.csproj"/>
+    <ProjectReference Include="..\Dictionary.Api.Controllers\Dictionary.Api.Controllers.csproj" />
   </ItemGroup>
 
 </Project>
