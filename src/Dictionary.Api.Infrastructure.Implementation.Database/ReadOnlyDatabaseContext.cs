@@ -4,11 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.Infrastructure.Implementation.Database;
 
-internal class ReadOnlyDatabaseContext : IReadOnlyDatabaseContext
+internal class ReadOnlyDatabaseContext(IDatabaseContext databaseContext) : IReadOnlyDatabaseContext
 {
-    private readonly DatabaseContext _databaseContext;
-
-    public ReadOnlyDatabaseContext(DatabaseContext databaseContext) => _databaseContext = databaseContext;
-
-    public IQueryable<Word> Words => _databaseContext.Words.AsNoTracking();
+    public IQueryable<Word> Words => databaseContext.Words.AsNoTracking();
 }

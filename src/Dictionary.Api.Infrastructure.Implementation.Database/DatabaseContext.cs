@@ -1,6 +1,6 @@
 using Dictionary.Api.Domain.Entities;
+using Dictionary.Api.Infrastructure.Implementation.Database.EntityTypeConfigurations;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
-using Dictionary.Api.Infrastructure.Interfaces.Database.EntityTypeConfigurations;
 using Dictionary.Api.Utilities;
 using Microsoft.EntityFrameworkCore;
 

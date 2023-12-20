@@ -2,7 +2,7 @@ using Dictionary.Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Dictionary.Api.Infrastructure.Interfaces.Database.EntityTypeConfigurations;
+namespace Dictionary.Api.Infrastructure.Implementation.Database.EntityTypeConfigurations;
 
 public class WordEntityTypeConfiguration : IEntityTypeConfiguration<Word>
 {
