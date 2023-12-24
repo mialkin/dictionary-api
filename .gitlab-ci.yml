@@ -37,7 +37,8 @@ test:
     PostgresSettings__ConnectionString: "User ID=dictionary_api;Password=dictionary_api;Host=postgres;Port=5432;Database=dictionary_api"
   script:
     - *restore_nuget_packages
-    - make migrate-database
+#    - make migrate-database
+    - dotnet ef database update --startup-project src/Dictionary.Api --project src/Dictionary.Api.Infrastructure.Implementation.Database
     - dotnet test --no-restore
 
 publish:
