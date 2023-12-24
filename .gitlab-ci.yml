@@ -22,13 +22,22 @@ build:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
     paths:
       - $NUGET_PACKAGES_DIRECTORY
-#test:
-#  stage: test
-#  interruptible: true
-#  image: $DOTNET_SDK_IMAGE
-#  script:
-#    - *restore_nuget_packages
-#    - dotnet test --no-restore
+
+test:
+  stage: test
+  interruptible: true
+  image: $DOTNET_SDK_IMAGE
+  services:
+    - name: postgres:16.1
+      alias: postgres
+  variables:
+    POSTGRES_DB: dictionary_api
+    POSTGRES_USER: dictionary_api
+    POSTGRES_PASSWORD: dictionary_api
+    PostgresSettings__ConnectionString: "User ID=dictionary_api;Password=dictionary_api;Host=postgres;Port=5432;Database=dictionary_api"
+  script:
+    - *restore_nuget_packages
+    - dotnet test --no-restore
 
 publish:
   stage: publish
