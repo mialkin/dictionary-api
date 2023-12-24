@@ -5,10 +5,15 @@ namespace Dictionary.Api.Configurations;
 
 public static class ApplicationConfiguration
 {
-    public static IServiceCollection ConfigureApplication(this IServiceCollection services)
+    public static IServiceCollection ConfigureApplication(
+        this IServiceCollection services,
+        ConfigurationManager builderConfiguration)
     {
         services.ConfigureMediatr();
-        services.ConfigureDatabase();
+
+        var postgresSettings =
+            builderConfiguration.GetRequiredSection(nameof(PostgresSettings)).Get<PostgresSettings>();
+        services.ConfigureDatabase(postgresSettings);
 
         return services;
     }

@@ -1,4 +1,5 @@
 using Dictionary.Api.Configurations;
+using Dictionary.Api.Infrastructure.Implementation.Database;
 using Dictionary.Api.Metrics;
 using Serilog;
 
@@ -16,7 +17,7 @@ services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 services.AddRouting(options => options.LowercaseUrls = true);
-services.ConfigureApplication();
+services.ConfigureApplication(builder.Configuration);
 services.ConfigureMetrics();
 
 var application = builder.Build();
@@ -32,7 +33,8 @@ application.UseSwaggerUI(options =>
 
 application.UseRouting();
 application.MapControllers();
-application.UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
+application
+    .UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
 application.Run();
 

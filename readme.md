@@ -5,7 +5,7 @@
 1\. Run application infrastructure:
 
 ```bash
-docker-compose -f docker-compose.infrastructure.yml up
+make run-infrastructure
 ```
 
 2\.
