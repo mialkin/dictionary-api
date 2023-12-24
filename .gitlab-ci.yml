@@ -39,6 +39,7 @@ test:
     - *restore_nuget_packages
 #    - make migrate-database
     - dotnet tool install dotnet-ef --global
+    - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet ef database update --startup-project src/Dictionary.Api --project src/Dictionary.Api.Infrastructure.Implementation.Database
     - dotnet test --no-restore
 
