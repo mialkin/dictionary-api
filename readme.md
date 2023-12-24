@@ -17,7 +17,7 @@ docker-compose -f docker-compose.infrastructure.yml up
 Apply database migrations:
 
 ```bash
-PostgresSettings__ConnectionString="User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api;Pooling=true" make migrate-database
+PostgresSettings__ConnectionString="User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api" make migrate-database
 ```
 
 

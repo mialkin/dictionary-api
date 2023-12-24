@@ -10,7 +10,7 @@ public static class DatabaseConfiguration
     {
         // TODO Move to appsettings.Ide.json
         var connectionString =
-            "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api;Pooling=true";
+            "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api";
 
         services.AddDbContext<IDatabaseContext, DatabaseContext>(builder =>
         {
