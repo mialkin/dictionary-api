@@ -34,10 +34,11 @@ test:
     POSTGRES_DB: dictionary_api
     POSTGRES_USER: dictionary_api
     POSTGRES_PASSWORD: dictionary_api
-    PostgresSettings__ConnectionString: "User ID=dictionary_api;Password=dictionary_api;Host=postgres;Port=5432;Database=dictionary_api"
+    ASPNETCORE_ENVIRONMENT: GitLab
   script:
     - *restore_nuget_packages
 #    - make migrate-database
+#    - https://docs.gitlab.com/ee/ci/services/
     - dotnet tool install dotnet-ef --global
     - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet ef database update --startup-project src/Dictionary.Api --project src/Dictionary.Api.Infrastructure.Implementation.Database

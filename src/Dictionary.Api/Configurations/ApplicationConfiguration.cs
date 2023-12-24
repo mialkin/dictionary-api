@@ -12,7 +12,7 @@ public static class ApplicationConfiguration
         services.ConfigureMediatr();
 
         var postgresSettings =
-            builderConfiguration.GetRequiredSection(nameof(PostgresSettings)).Get<PostgresSettings>();
+            builderConfiguration.GetRequiredSection(key: nameof(PostgresSettings)).Get<PostgresSettings>();
         services.ConfigureDatabase(postgresSettings);
 
         return services;
