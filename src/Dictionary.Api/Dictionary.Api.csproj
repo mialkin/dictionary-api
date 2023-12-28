@@ -13,18 +13,18 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.7.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.6.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.6.0-rc.1" />
-    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.5.1" />
+    <PackageReference Include="OpenTelemetry.Exporter.Prometheus.AspNetCore" Version="1.7.0-rc.1"/>
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="1.7.0-rc.1"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.6.0-rc.1"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.6.0-rc.1"/>
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="1.5.1"/>
     <PackageReference Include="Serilog.AspNetCore" Version="8.0.0"/>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Dictionary.Api.Infrastructure.Implementation.Database\Dictionary.Api.Infrastructure.Implementation.Database.csproj"/>
-    <ProjectReference Include="..\Dictionary.Api.Controllers\Dictionary.Api.Controllers.csproj" />
+    <ProjectReference Include="..\Dictionary.Api.Controllers\Dictionary.Api.Controllers.csproj"/>
   </ItemGroup>
 
 </Project>

@@ -39,7 +39,7 @@ test:
     - *restore_nuget_packages
 #    - make migrate-database
 #    - https://docs.gitlab.com/ee/ci/services/
-    - dotnet tool install dotnet-ef --global
+    - dotnet tool install dotnet-ef --global # TODO Create custom Docker image with dotnet tool pre-installed?
     - export PATH="$PATH:/root/.dotnet/tools"
     - dotnet ef database update --startup-project src/Dictionary.Api --project src/Dictionary.Api.Infrastructure.Implementation.Database
     - dotnet test --no-restore
