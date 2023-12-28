@@ -3,6 +3,7 @@ using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 using Dictionary.Api.UseCases.Words.Queries.GetWord;
 using Dictionary.Api.UseCases.Words.Queries.ListWords;
+using Dictionary.Common;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Api.Controllers;
