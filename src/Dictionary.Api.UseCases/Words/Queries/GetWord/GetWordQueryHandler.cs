@@ -5,16 +5,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.UseCases.Words.Queries.GetWord;
 
-internal class GetWordQueryHandler : IRequestHandler<GetWordQuery, Result<GetWordDto>>
+internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
+    : IRequestHandler<GetWordQuery, Result<GetWordDto>>
 {
-    private readonly IReadOnlyDatabaseContext _readOnlyDatabaseContext;
-
-    public GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext) =>
-        _readOnlyDatabaseContext = readOnlyDatabaseContext;
-
     public async Task<Result<GetWordDto>> Handle(GetWordQuery request, CancellationToken cancellationToken)
     {
-        var queryable = _readOnlyDatabaseContext.Words;
+        var queryable = readOnlyDatabaseContext.Words;
 
         var word = await queryable
             .Where(x => x.LanguageId == request.LanguageId && x.Name == request.Name)
