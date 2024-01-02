@@ -26,7 +26,7 @@ public class WordsController : ApiControllerBase
         CancellationToken cancellationToken)
     {
         var result = await Sender.Send(new GetWordQuery(languageId, name), cancellationToken);
-        return Ok(result.Value);
+        return FromResult(result);
     }
 
     [HttpPatch("update")]
