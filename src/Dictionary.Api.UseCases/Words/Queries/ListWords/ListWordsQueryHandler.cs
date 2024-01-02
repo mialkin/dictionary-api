@@ -4,20 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.UseCases.Words.Queries.ListWords;
 
-internal class ListWordsQueryHandler : IRequestHandler<ListWordsQuery, IReadOnlyCollection<ListWordsDto>>
+internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
+    : IRequestHandler<ListWordsQuery, IReadOnlyCollection<ListWordsDto>>
 {
-    private readonly IReadOnlyDatabaseContext _readOnlyDatabaseContext;
-
-    public ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext) =>
-        _readOnlyDatabaseContext = readOnlyDatabaseContext;
-
     public async Task<IReadOnlyCollection<ListWordsDto>> Handle(
         ListWordsQuery request,
         CancellationToken cancellationToken)
     {
         // TODO Use https://github.com/vkhorikov/CSharpFunctionalExtensions
 
-        var queryable = _readOnlyDatabaseContext.Words;
+        var queryable = readOnlyDatabaseContext.Words;
         // TODO Use Elasticsearch for storing words and translations?
 
         var words = await queryable
