@@ -11,4 +11,8 @@
     <ProjectReference Include="..\Dictionary.Api.Utilities\Dictionary.Api.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Slvpreview.Dictionary.Common" Version="0.2.0" />
+  </ItemGroup>
+
 </Project>

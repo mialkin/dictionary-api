@@ -31,7 +31,10 @@ public class WordsController : ApiControllerBase
     [HttpPatch("update")]
     public async Task<IActionResult> Update([FromBody] UpdateWordDto dto, CancellationToken cancellationToken)
     {
-        await Sender.Send(new UpdateWordCommand(dto), cancellationToken);
+        await Sender.Send(
+            request: new UpdateWordCommand(dto.Id, dto.Name, dto.Transcription, dto.Translation),
+            cancellationToken);
+
         return Ok();
     }
 

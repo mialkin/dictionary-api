@@ -13,8 +13,8 @@ public class CreateWordCommandHandler(IDatabaseContext databaseContext) : IReque
         databaseContext.Words.Add(new Word(
             dto.LanguageId,
             dto.Name,
-            dto.Transcription,
-            dto.Translation
+            dto.Translation,
+            dto.Transcription
         ));
 
         await databaseContext.SaveChangesAsync(cancellationToken);

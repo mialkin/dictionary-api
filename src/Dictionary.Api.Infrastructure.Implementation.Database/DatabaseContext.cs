@@ -32,5 +32,5 @@ internal class DatabaseContext : DbContext, IDatabaseContext
     }
 
     private static Word CreateWord(int languageId, string name, string? transcription, string translation) =>
-        new(languageId, name, transcription, translation);
+        new(languageId, name, translation, transcription);
 }

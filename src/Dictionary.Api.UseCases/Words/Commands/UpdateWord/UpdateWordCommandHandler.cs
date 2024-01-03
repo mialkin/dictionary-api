@@ -7,13 +7,12 @@ public class UpdateWordCommandHandler(IDatabaseContext databaseContext) : IReque
 {
     public async Task Handle(UpdateWordCommand request, CancellationToken cancellationToken)
     {
-        var dto = request.UpdateWordDto;
-        var word = await databaseContext.Words.FindAsync(dto.GetPrimaryKey(), cancellationToken);
+        var word = await databaseContext.Words.FindAsync(request.Id, cancellationToken);
 
         if (word is null) // TODO Do not throw exception. Just log information and return Maybe?
             throw new InvalidOperationException("Error updating word. Word can't be updated because it doesn't exist");
 
-        word.Update(dto.Transcription, dto.Translation);
+        word.Update(request.Translation, request.Transcription);
 
         await databaseContext.SaveChangesAsync(cancellationToken);
     }
