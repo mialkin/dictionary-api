@@ -53,7 +53,7 @@ public class Word
     {
         var unitResult = CanUpdate(translation, transcription);
         if (unitResult.IsFailure)
-            throw new InvalidOperationException(); // Pass error returned by CanUpdate
+            throw new InvalidOperationException(); // Pass error returned by CanUpdate and word ID
 
         Translation = translation;
         Transcription = transcription;
