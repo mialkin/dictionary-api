@@ -1,5 +1,3 @@
-using Dictionary.Common;
-
 namespace Dictionary.Api.Domain;
 
 public static class Errors
@@ -15,5 +13,19 @@ public static class Errors
             new(code: "word.transcription.is.invalid",
                 message: $"Transcription must be non empty string less than or " +
                          $"equal to {Constants.Words.TranslationMaxLength} characters in length");
+    }
+
+    public static class General
+    {
+        public static Error NotFound(long? id = null)
+        {
+            string forId = id == null ? "" : $" for Id '{id}'";
+            return new Error(code: "record.not.found", message: $"Record not found{forId}");
+        }
+
+        public static Error InternalServerError(string message)
+        {
+            return new Error("internal.server.error", message);
+        }
     }
 }

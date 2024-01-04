@@ -1,4 +1,5 @@
 using CSharpFunctionalExtensions;
+using Dictionary.Api.Domain;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -6,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 namespace Dictionary.Api.UseCases.Words.Queries.GetWord;
 
 internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
-    : IRequestHandler<GetWordQuery, Result<GetWordDto>>
+    : IRequestHandler<GetWordQuery, Result<GetWordDto, Error>>
 {
-    public async Task<Result<GetWordDto>> Handle(GetWordQuery request, CancellationToken cancellationToken)
+    public async Task<Result<GetWordDto, Error>> Handle(GetWordQuery request, CancellationToken cancellationToken)
     {
         var queryable = readOnlyDatabaseContext.Words;
 
@@ -17,7 +18,7 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
             .SingleOrDefaultAsync(cancellationToken);
 
         if (word is null)
-            return Result.Failure<GetWordDto>("Word not found");
+            return Result.Failure<GetWordDto, Error>(error: Errors.General.NotFound());
 
         var result = new GetWordDto(
             word.LanguageId,

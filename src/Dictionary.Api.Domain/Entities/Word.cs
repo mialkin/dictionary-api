@@ -1,5 +1,4 @@
 ﻿using CSharpFunctionalExtensions;
-using Dictionary.Common;
 
 namespace Dictionary.Api.Domain.Entities;
 

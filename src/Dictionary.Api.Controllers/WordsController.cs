@@ -9,7 +9,7 @@ namespace Dictionary.Api.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class WordsController : ApiControllerBase
+public class WordsController : ApplicationController
 {
     [HttpPost("create")]
     public async Task<IActionResult> Create([FromBody] CreateWordDto dto, CancellationToken cancellationToken)

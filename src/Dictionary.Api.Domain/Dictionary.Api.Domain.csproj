@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Slvpreview.Dictionary.Common" Version="0.2.0" />
+    <PackageReference Include="CSharpFunctionalExtensions" Version="2.40.3" />
   </ItemGroup>
 
 </Project>
