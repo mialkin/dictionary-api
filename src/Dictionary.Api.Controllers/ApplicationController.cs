@@ -35,4 +35,12 @@ public abstract class ApplicationController : ControllerBase
 
         return Error(result.Error);
     }
+
+    protected IActionResult FromUnitResult(UnitResult<Error> result)
+    {
+        if (result.IsSuccess)
+            return Ok();
+
+        return Error(result.Error);
+    }
 }

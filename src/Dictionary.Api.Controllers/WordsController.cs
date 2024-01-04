@@ -31,11 +31,11 @@ public class WordsController : ApplicationController
     [HttpPatch("update")]
     public async Task<IActionResult> Update([FromBody] UpdateWordDto dto, CancellationToken cancellationToken)
     {
-        await Sender.Send(
+        var unitResult = await Sender.Send(
             request: new UpdateWordCommand(dto.Id, dto.Name, dto.Transcription, dto.Translation),
             cancellationToken);
 
-        return Ok();
+        return FromUnitResult(unitResult);
     }
 
     [HttpDelete("delete")]

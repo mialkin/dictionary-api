@@ -35,22 +35,24 @@ public class Word
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    public Result<object, Error> CanUpdate(string translation, string? transcription)
+    public static UnitResult<Error> CanUpdate(string translation, string? transcription)
     {
         if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
             return Errors.Word.TranslationIsInvalid();
+
+        // TODO Make translation a value object and move length check inside of it?
 
         if (!string.IsNullOrEmpty(transcription)
             && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
             return Errors.Word.TranscriptionIsInvalid();
 
-        return new object(); // TODO Replace with Result.Empty ?
+        return UnitResult.Success<Error>();
     }
 
     public void Update(string translation, string? transcription)
     {
-        var result = CanUpdate(translation, transcription);
-        if (result.IsFailure)
+        var unitResult = CanUpdate(translation, transcription);
+        if (unitResult.IsFailure)
             throw new InvalidOperationException(); // Pass error returned by CanUpdate
 
         Translation = translation;

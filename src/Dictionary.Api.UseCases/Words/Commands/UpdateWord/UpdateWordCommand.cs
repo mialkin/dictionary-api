@@ -1,5 +1,8 @@
+using CSharpFunctionalExtensions;
+using Dictionary.Api.Domain;
 using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 
-public record UpdateWordCommand(Guid Id, string Name, string? Transcription, string Translation) : IRequest;
+public record UpdateWordCommand(Guid Id, string Name, string? Transcription, string Translation)
+    : IRequest<UnitResult<Error>>;
