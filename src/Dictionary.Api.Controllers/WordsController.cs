@@ -40,13 +40,11 @@ public class WordsController : ApplicationController
     }
 
     [HttpDelete("delete")]
-    public async Task<IActionResult> Delete([FromBody] DeleteWordDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Delete([FromBody] Guid id, CancellationToken cancellationToken)
+    // TODO Use DeleteWordRequest instead just plain id
     {
-        await Sender.Send(new DeleteWordCommand(dto), cancellationToken);
-
-        // TODO Return different responses based on outcomes of operations
-        // TODO Use our Result plus take a look at https://enterprisecraftsmanship.com/posts/functional-c-handling-failures-input-errors/
-        return Ok();
+        var unitResult = await Sender.Send(new DeleteWordCommand(id), cancellationToken);
+        return FromUnitResult(unitResult);
     }
 
     [HttpGet("list")]
