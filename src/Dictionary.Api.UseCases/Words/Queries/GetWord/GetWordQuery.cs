@@ -4,4 +4,4 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Queries.GetWord;
 
-public record GetWordQuery(int LanguageId, string Name) : IRequest<Result<GetWordDto, Error>>;
+public record GetWordQuery(Guid Id) : IRequest<Result<Maybe<GetWordDto>, Error>>;

@@ -17,7 +17,7 @@ public static class Errors
 
     public static class General
     {
-        public static Error NotFound(long? id = null)
+        public static Error NotFound(Guid? id = null)
         {
             string forId = id == null ? "" : $" for Id '{id}'";
             return new Error(code: "record.not.found", message: $"Record not found{forId}");

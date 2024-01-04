@@ -1,3 +1,4 @@
+using Dictionary.Api.Domain;
 using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
@@ -19,13 +20,13 @@ public class WordsController : ApplicationController
     }
 
     [HttpGet("get")]
-    public async Task<IActionResult> Get(
-        [FromQuery] int languageId,
-        [FromQuery] string name,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> Get([FromQuery] Guid id, CancellationToken cancellationToken)
     {
-        var result = await Sender.Send(new GetWordQuery(languageId, name), cancellationToken);
-        return FromResult(result);
+        var result = await Sender.Send(new GetWordQuery(id), cancellationToken);
+        if (result.IsFailure)
+            return Error(result.Error);
+
+        return FromMaybe(result.Value, error: Errors.General.NotFound(id));
     }
 
     [HttpPatch("update")]

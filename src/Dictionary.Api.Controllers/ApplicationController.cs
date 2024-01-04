@@ -36,6 +36,17 @@ public abstract class ApplicationController : ControllerBase
         return Error(result.Error);
     }
 
+    protected IActionResult FromMaybe<T>(Maybe<T> maybe, Error? error = null)
+    {
+        if (maybe.HasNoValue && error is null)
+            return NotFound();
+
+        if (maybe.HasNoValue && error is not null)
+            return NotFound(error);
+
+        return Ok(maybe.Value);
+    }
+
     protected IActionResult FromUnitResult(UnitResult<Error> result)
     {
         if (result.IsSuccess)

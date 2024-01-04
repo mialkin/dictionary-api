@@ -7,20 +7,25 @@ using Microsoft.EntityFrameworkCore;
 namespace Dictionary.Api.UseCases.Words.Queries.GetWord;
 
 internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
-    : IRequestHandler<GetWordQuery, Result<GetWordDto, Error>>
+    : IRequestHandler<GetWordQuery, Result<Maybe<GetWordDto>, Error>>
 {
-    public async Task<Result<GetWordDto, Error>> Handle(GetWordQuery request, CancellationToken cancellationToken)
+    public async Task<Result<Maybe<GetWordDto>, Error>> Handle(
+        GetWordQuery request,
+        CancellationToken cancellationToken)
     {
         var queryable = readOnlyDatabaseContext.Words;
 
+        // TODO Return just Maybe, not Result<Maybe> ?
+
         var word = await queryable
-            .Where(x => x.LanguageId == request.LanguageId && x.Name == request.Name)
+            .Where(x => x.Id == request.Id)
             .SingleOrDefaultAsync(cancellationToken);
 
         if (word is null)
-            return Result.Failure<GetWordDto, Error>(error: Errors.General.NotFound());
+            return Maybe<GetWordDto>.None;
 
         var result = new GetWordDto(
+            word.Id,
             word.LanguageId,
             word.Name,
             word.Transcription,
@@ -28,6 +33,6 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
             word.CreatedAt,
             word.UpdatedAt);
 
-        return result;
+        return Maybe.From(result);
     }
 }
