@@ -11,8 +11,6 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
         ListWordsQuery request,
         CancellationToken cancellationToken)
     {
-        // TODO Use https://github.com/vkhorikov/CSharpFunctionalExtensions
-
         var queryable = readOnlyDatabaseContext.Words;
         // TODO Use Elasticsearch for storing words and translations?
 
@@ -27,6 +25,7 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
                     x.CreatedAt,
                     x.UpdatedAt)
             )
+            .Take(100) // TODO Move to specification and reuse across different methods?
             .ToListAsync(cancellationToken);
 
         return words;

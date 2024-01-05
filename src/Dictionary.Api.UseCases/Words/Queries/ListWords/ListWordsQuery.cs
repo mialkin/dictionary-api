@@ -2,4 +2,4 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Queries.ListWords;
 
-public record ListWordsQuery(int LanguageId, string? SearchTerm) : IRequest<IReadOnlyCollection<ListWordsDto>>;
+public record ListWordsQuery(int LanguageId) : IRequest<IReadOnlyCollection<ListWordsDto>>;

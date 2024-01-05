@@ -48,13 +48,11 @@ public class WordsController : ApplicationController
     }
 
     [HttpGet("list")]
-    public async Task<IActionResult> List(
-        [FromQuery] int languageId,
-        [FromQuery] string? term,
-        CancellationToken cancellationToken)
+    public async Task<IActionResult> List([FromQuery] int languageId, CancellationToken cancellationToken)
     {
+        // TODO Make Language an entity and validate if languageId > 0
         // TODO Return SuccessResponse with request ID, i.e. trace ID
-        var result = await Sender.Send(new ListWordsQuery(languageId, term), cancellationToken);
+        var result = await Sender.Send(new ListWordsQuery(languageId), cancellationToken);
         return Ok(result);
     }
 }

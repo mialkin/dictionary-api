@@ -3,23 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Api.Controllers;
 
-public sealed class EnvelopeResult : IActionResult
+public sealed class EnvelopeResult(Envelope envelope, HttpStatusCode statusCode) : IActionResult
 {
-    private readonly Envelope _envelope;
-    private readonly int _statusCode;
-
-    public EnvelopeResult(Envelope envelope, HttpStatusCode statusCode)
-    {
-        _statusCode = (int)statusCode;
-        _envelope = envelope;
-    }
+    private readonly int _statusCode = (int)statusCode;
 
     public Task ExecuteResultAsync(ActionContext context)
     {
-        var objectResult = new ObjectResult(_envelope)
-        {
-            StatusCode = _statusCode
-        };
+        var objectResult = new ObjectResult(envelope) { StatusCode = _statusCode };
 
         return objectResult.ExecuteResultAsync(context);
     }

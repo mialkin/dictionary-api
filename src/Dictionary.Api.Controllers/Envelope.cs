@@ -24,7 +24,7 @@ public class Envelope
         return new Envelope(result, null, null);
     }
 
-    public static Envelope Error(Error error, string? invalidField)
+    public static Envelope Error(Error? error, string? invalidField)
     {
         return new Envelope(null, error, invalidField);
     }

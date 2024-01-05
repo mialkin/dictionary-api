@@ -1,0 +1,16 @@
+@baseUrl=http://localhost:2100/api
+
+### Create new word
+
+POST {{baseUrl}}/words/create
+Content-Type: application/json
+
+{
+    "languageId": "1",
+    "Name": "apple",
+    "Translation": "яблоко",
+    "Transcription": "'æpl"
+}
+
+### List all words
+GET {{baseUrl}}/words/list?languageId=1

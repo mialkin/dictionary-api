@@ -17,6 +17,8 @@ public class CreateWordCommandHandler(IDatabaseContext databaseContext) : IReque
             dto.Transcription
         ));
 
+        // TODO Use try/catch to check if uniqueness constraint is not respected. Write integration test that breaks
+        // constraint and the appropriate error message is returned
         await databaseContext.SaveChangesAsync(cancellationToken);
     }
 }
