@@ -7,6 +7,7 @@ Content-Type: application/json
 
 {
     "languageId": "1",
+    "GenderId": "2",
     "Name": "apple",
     "Translation": "яблоко",
     "Transcription": "'æpl"

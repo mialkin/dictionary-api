@@ -25,12 +25,13 @@ internal class DatabaseContext : DbContext, IDatabaseContext
     private static void SeedWords(ModelBuilder modelBuilder) // TODO Remove it
     {
         modelBuilder.Entity<Word>().HasData(
-            CreateWord(1, "apple", null, "яблоко"),
-            CreateWord(1, "orange", null, "апельсин"),
-            CreateWord(1, "banana", "bə'nɑːnə", "банан")
+            CreateWord(1, 0, "apple", null, "яблоко"),
+            CreateWord(1, 0, "orange", null, "апельсин"),
+            CreateWord(1, 0, "banana", "bə'nɑːnə", "банан")
         );
     }
 
-    private static Word CreateWord(int languageId, string name, string? transcription, string translation) =>
-        new(languageId, name, translation, transcription);
+    private static Word CreateWord(int languageId, int genderId, string name, string? transcription,
+        string translation) =>
+        new(languageId, genderId, name, translation, transcription);
 }

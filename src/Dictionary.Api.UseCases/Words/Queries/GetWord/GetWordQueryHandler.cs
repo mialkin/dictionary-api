@@ -27,9 +27,10 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
         var result = new GetWordDto(
             word.Id,
             word.LanguageId,
+            word.GenderId,
             word.Name,
-            word.Transcription,
             word.Translation,
+            word.Transcription,
             word.CreatedAt,
             word.UpdatedAt);
 

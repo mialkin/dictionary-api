@@ -8,6 +8,6 @@ public class WordEntityTypeConfiguration : IEntityTypeConfiguration<Word>
 {
     public void Configure(EntityTypeBuilder<Word> builder)
     {
-        builder.HasKey(x => new { x.LanguageId, x.Name });
+        builder.HasKey(x => new { x.LanguageId, x.Name }); // TODO Add UserId uniqueness
     }
 }

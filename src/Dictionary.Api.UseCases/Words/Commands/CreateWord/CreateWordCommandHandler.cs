@@ -12,6 +12,7 @@ public class CreateWordCommandHandler(IDatabaseContext databaseContext) : IReque
 
         databaseContext.Words.Add(new Word(
             dto.LanguageId,
+            dto.GenderId,
             dto.Name,
             dto.Translation,
             dto.Transcription

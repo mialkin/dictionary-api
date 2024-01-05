@@ -2,8 +2,9 @@ namespace Dictionary.Api.UseCases.Words.Queries.ListWords;
 
 public record ListWordsDto(
     int LanguageId,
+    int GenderId,
     string Name,
+    string? Translation,
     string? Transcription,
-    string Translation,
     DateTime CreatedAt,
     DateTime? UpdatedAt);

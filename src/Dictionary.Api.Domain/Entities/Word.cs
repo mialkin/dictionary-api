@@ -13,11 +13,11 @@ public class Word
     {
     }
 
-    public Word(int languageId, string name, string translation, string? transcription)
+    public Word(int languageId, int genderId, string name, string? translation, string? transcription)
     {
         Id = Guid.NewGuid();
-
         LanguageId = languageId;
+        GenderId = genderId;
         Name = name;
         Translation = translation;
         Transcription = transcription;
@@ -29,9 +29,10 @@ public class Word
 
     public Guid Id { get; private set; }
     public int LanguageId { get; private set; }
+    public int GenderId { get; private set; }
     public string Name { get; private set; }
+    public string? Translation { get; private set; }
     public string? Transcription { get; private set; }
-    public string Translation { get; private set; }
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 

@@ -19,9 +19,10 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
             .Select(x =>
                 new ListWordsDto(
                     x.LanguageId,
+                    x.GenderId,
                     x.Name,
-                    x.Transcription,
                     x.Translation,
+                    x.Transcription,
                     x.CreatedAt,
                     x.UpdatedAt)
             )
