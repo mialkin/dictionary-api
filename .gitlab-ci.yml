@@ -49,7 +49,7 @@ publish:
   interruptible: true
   image: docker:stable
   services:
-    - docker:dind
+    - docker:dind # Use Kaniko? https://docs.gitlab.com/ee/ci/docker/using_kaniko.html
   script:
     - docker build -t ${DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG} .
     - docker login --username ${DOCKER_REGISTRY_USERNAME} --password ${DOCKER_REGISTRY_PASSWORD}
