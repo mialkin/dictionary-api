@@ -1,5 +1,4 @@
 using Dictionary.Api.Configurations;
-using Dictionary.Api.Infrastructure.Implementation.Database;
 using Dictionary.Api.Metrics;
 using Serilog;
 
@@ -39,6 +38,8 @@ application
 application.Run();
 
 // TODO Replace Makefile with bash.sh
+
+// Use Dependabot for updating dependencies https://github.com/serilog-contrib/serilog-sinks-grafana-loki/commits?author=dependabot%5Bbot%5D
 
 public partial class Program
 {
