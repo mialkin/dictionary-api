@@ -36,6 +36,16 @@ public class Word
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
+    public bool CanCreate()
+    {
+        return true; // TODO Implement
+    }
+
+    public void Create()
+    {
+        // TODO Call CanCreate(). Call private/protected constructor?
+    }
+
     public static UnitResult<Error> CanUpdate(string translation, string? transcription)
     {
         if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
