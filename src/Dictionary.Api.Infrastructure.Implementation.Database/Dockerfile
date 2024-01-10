@@ -1,7 +1,4 @@
-﻿FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-environment
-
-RUN dotnet tool install dotnet-ef --global
-ENV PATH="$PATH:/root/.dotnet/tools"
+﻿FROM mialkin/dotnet8-sdk-with-tools:1.0.0 AS build-environment
 
 COPY src ./src
 
