@@ -50,12 +50,10 @@ publish-migrations:
   stage: publish-migrations
   interruptible: true
   image: docker:stable
-  variables:
-    ASPNETCORE_ENVIRONMENT: GitLab
   services:
     - docker:dind
   script:
-    - docker build --tag ${MIGRATIONS_DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG} --file src/Dictionary.Api.Infrastructure.Implementation.Database/Dockerfile .
+    - docker build --build-arg ASPNETCORE_ENVIRONMENT=GitLab --tag ${MIGRATIONS_DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG} --file src/Dictionary.Api.Infrastructure.Implementation.Database/Dockerfile .
     - docker login --username ${DOCKER_REGISTRY_USERNAME} --password ${DOCKER_REGISTRY_PASSWORD}
     - docker push ${MIGRATIONS_DOCKER_IMAGE_NAME}:${CI_COMMIT_TAG}
     - docker logout
