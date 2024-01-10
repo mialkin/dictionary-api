@@ -19,9 +19,7 @@ make run-infrastructure
 # make shutdown-infrastructure
 ```
 
-2\.
-
-Set user secret:
+2\. Set user secret:
 
 ```bash
 dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api" --project "src/Dictionary.Api"
