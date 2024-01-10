@@ -39,13 +39,9 @@ test:
     ASPNETCORE_ENVIRONMENT: GitLab
   script:
     - *restore_nuget_packages
-#    - make migrate-database
-#    - https://docs.gitlab.com/ee/ci/services/
     - dotnet tool install dotnet-ef --global # TODO Create custom Docker image with dotnet tool pre-installed?
     - export PATH="$PATH:/root/.dotnet/tools"
-    - dotnet ef database update
-      --startup-project src/Dictionary.Api
-      --project src/Dictionary.Api.Infrastructure.Implementation.Database
+    - make update-database
     - dotnet test --no-restore
 
 publish-migrations:

@@ -1,5 +1,5 @@
-export MIGRATE_STARTUP_PROJECT_KEY=Dictionary.Api
-export MIGRATE_PROJECT_KEY=Dictionary.Api.Infrastructure.Implementation.Database
+export PROJECT=Dictionary.Api.Infrastructure.Implementation.Database
+export STARTUP_PROJECT=Dictionary.Api
 
 .PHONY: copy-env
 copy-env:
@@ -13,10 +13,6 @@ run-infrastructure: copy-env
 shutdown-infrastructure:
 	docker-compose -f docker-compose.infrastructure.yml down
 
-.PHONY: migrate-database
-migrate-database:
-	dotnet ef database update --startup-project src/${MIGRATE_STARTUP_PROJECT_KEY} --project src/${MIGRATE_PROJECT_KEY}
-
-.PHONY: add-migration
-add-migration:
-	dotnet ef migrations add Add_Words_Table --startup-project src/${MIGRATE_STARTUP_PROJECT_KEY} --project src/${MIGRATE_PROJECT_KEY}
+.PHONY: update-database
+update-database:
+	dotnet ef database update --project src/${PROJECT} --startup-project src/${STARTUP_PROJECT}
