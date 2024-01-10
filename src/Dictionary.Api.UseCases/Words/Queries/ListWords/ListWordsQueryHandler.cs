@@ -19,6 +19,7 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
             .OrderByDescending(x => x.CreatedAt) // TODO Add database index
             .Select(x =>
                 new ListWordsDto(
+                    x.Id,
                     x.LanguageId,
                     x.GenderId,
                     x.Name,
