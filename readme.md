@@ -11,7 +11,7 @@
 
 ## Run application
 
-1\. Run the application infrastructure:
+1\. Run application infrastructure:
 
 ```bash
 make run-infrastructure
@@ -36,9 +36,13 @@ dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_
 make update-database
 ```
 
-4\. Run `Dicrionary.Api` project in your IDE.
+4\. Run application:
 
-5\. Go to <http://localhost:2100>.
+```bash
+dotnet run --project "src/Dictionary.Api"
+```
+
+5\. Navigate to <http://localhost:2100>.
 
 [//]: # (// TODO Add command that sets everything up and runs app in Docker?)
 
