@@ -5,8 +5,6 @@ ENV PATH="$PATH:/root/.dotnet/tools"
 
 COPY src ./src
 
-ENV ASPNETCORE_ENVIRONMENT=GitLab
-
 RUN dotnet ef migrations bundle \
     --startup-project src/Dictionary.Api \
     --project src/Dictionary.Api.Infrastructure.Implementation.Database \
