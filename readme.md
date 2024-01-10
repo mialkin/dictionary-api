@@ -34,7 +34,7 @@ dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_
 # dotnet user-secrets clear --project "src/Dictionary.Api"
 ```
 
-3.\ Apply database migrations:
+3\. Apply database migrations:
 
 ```bash
 make update-database
