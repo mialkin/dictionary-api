@@ -16,6 +16,7 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
 
         var words = await queryable
             .Where(x => x.LanguageId == request.LanguageId)
+            .OrderByDescending(x => x.CreatedAt) // TODO Add database index
             .Select(x =>
                 new ListWordsDto(
                     x.LanguageId,
@@ -27,6 +28,7 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
                     x.UpdatedAt)
             )
             .Take(100) // TODO Move to specification and reuse across different methods?
+            // TODO Implement client pagination with default value set on the client and on the server
             .ToListAsync(cancellationToken);
 
         return words;
