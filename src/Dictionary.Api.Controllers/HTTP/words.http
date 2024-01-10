@@ -7,10 +7,10 @@ Content-Type: application/json
 
 {
     "languageId": "1",
-    "GenderId": "2",
-    "Name": "apple",
-    "Translation": "яблоко",
-    "Transcription": "'æpl"
+    "genderId": "2",
+    "name": "apple",
+    "translation": "яблоко",
+    "transcription": "'æpl"
 }
 
 ### List all words
