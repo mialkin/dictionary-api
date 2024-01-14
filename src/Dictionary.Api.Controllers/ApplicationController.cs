@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Dictionary.Api.Controllers;
 
 [ApiController]
+[Route("api/[controller]")]
 public abstract class ApplicationController : ControllerBase
 {
     private ISender? _sender;

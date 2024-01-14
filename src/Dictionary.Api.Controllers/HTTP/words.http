@@ -1,4 +1,4 @@
-@baseUrl=http://localhost:2100/api
+@baseUrl=http://localhost:2300/api
 
 ### Create new word
 

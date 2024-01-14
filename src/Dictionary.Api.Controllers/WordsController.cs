@@ -8,8 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Api.Controllers;
 
-[ApiController]
-[Route("api/[controller]")]
 public class WordsController : ApplicationController
 {
     [HttpPost("create")]

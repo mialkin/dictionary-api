@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.CreateWord;
 
-public class CreateWordCommandHandler(IDatabaseContext databaseContext) : IRequestHandler<CreateWordCommand>
+internal class CreateWordCommandHandler(IDatabaseContext databaseContext) : IRequestHandler<CreateWordCommand>
 {
     public async Task Handle(CreateWordCommand request, CancellationToken cancellationToken)
     {

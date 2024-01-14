@@ -6,7 +6,7 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 
-public class UpdateWordCommandHandler(IDatabaseContext databaseContext)
+internal class UpdateWordCommandHandler(IDatabaseContext databaseContext)
     : IRequestHandler<UpdateWordCommand, UnitResult<Error>>
 {
     public async Task<UnitResult<Error>> Handle(UpdateWordCommand request, CancellationToken cancellationToken)

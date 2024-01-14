@@ -1,5 +1,4 @@
 using Dictionary.Api.Infrastructure.Implementation.Database;
-using Dictionary.Api.UseCases.Configurations;
 
 namespace Dictionary.Api.Configurations;
 

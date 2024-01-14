@@ -22,7 +22,7 @@ make run-infrastructure
 2\. Set user secret:
 
 ```bash
-dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=2200;Database=dictionary_api" --project "src/Dictionary.Api"
+dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=3300;Database=dictionary_api" --project "src/Dictionary.Api"
 
 # dotnet user-secrets list --project "src/Dictionary.Api"
 # dotnet user-secrets clear --project "src/Dictionary.Api"
@@ -40,7 +40,7 @@ make update-database
 dotnet run --project "src/Dictionary.Api"
 ```
 
-5\. Navigate to <http://localhost:2100>.
+5\. Navigate to <http://localhost:2300>.
 
 [//]: # (// TODO Add command that sets everything up and runs app in Docker?)
 

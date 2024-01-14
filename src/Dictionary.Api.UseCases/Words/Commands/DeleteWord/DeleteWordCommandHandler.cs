@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 
-public class DeleteWordCommandHandler(IDatabaseContext databaseContext)
+internal class DeleteWordCommandHandler(IDatabaseContext databaseContext)
     : IRequestHandler<DeleteWordCommand, UnitResult<Error>>
 {
     public async Task<UnitResult<Error>> Handle(DeleteWordCommand request, CancellationToken cancellationToken)
