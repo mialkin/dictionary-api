@@ -1,3 +1,4 @@
+using Dictionary.Api.Controllers.Words.Requests;
 using Dictionary.Api.Domain;
 using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
@@ -6,14 +7,21 @@ using Dictionary.Api.UseCases.Words.Queries.GetWord;
 using Dictionary.Api.UseCases.Words.Queries.ListWords;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Dictionary.Api.Controllers;
+namespace Dictionary.Api.Controllers.Words;
 
 public class WordsController : ApplicationController
 {
     [HttpPost("create")]
-    public async Task<IActionResult> Create([FromBody] CreateWordDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Create([FromBody] CreateWordRequest request, CancellationToken cancellationToken)
     {
-        await Sender.Send(new CreateWordCommand(dto), cancellationToken);
+        var command = new CreateWordCommand(
+            request.LanguageId,
+            request.GenderId,
+            request.Name,
+            request.Translation,
+            request.Transcription);
+
+        await Sender.Send(command, cancellationToken);
         return Ok();
     }
 
@@ -28,10 +36,10 @@ public class WordsController : ApplicationController
     }
 
     [HttpPatch("update")]
-    public async Task<IActionResult> Update([FromBody] UpdateWordDto dto, CancellationToken cancellationToken)
+    public async Task<IActionResult> Update([FromBody] UpdateWordRequest request, CancellationToken cancellationToken)
     {
         var unitResult = await Sender.Send(
-            request: new UpdateWordCommand(dto.Id, dto.Name, dto.Transcription, dto.Translation),
+            request: new UpdateWordCommand(request.Id, request.Name, request.Transcription, request.Translation),
             cancellationToken);
 
         return FromUnitResult(unitResult);

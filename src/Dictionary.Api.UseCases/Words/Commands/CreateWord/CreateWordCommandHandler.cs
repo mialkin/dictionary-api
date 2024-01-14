@@ -8,14 +8,12 @@ internal class CreateWordCommandHandler(IDatabaseContext databaseContext) : IReq
 {
     public async Task Handle(CreateWordCommand request, CancellationToken cancellationToken)
     {
-        var dto = request.CreateWordDto;
-
         databaseContext.Words.Add(new Word(
-            dto.LanguageId,
-            dto.GenderId,
-            dto.Name,
-            dto.Translation,
-            dto.Transcription
+            request.LanguageId,
+            request.GenderId,
+            request.Name,
+            request.Translation,
+            request.Transcription
         ));
 
         // TODO Use try/catch to check if uniqueness constraint is not respected. Write integration test that breaks

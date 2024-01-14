@@ -2,4 +2,5 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.CreateWord;
 
-public record CreateWordCommand(CreateWordDto CreateWordDto) : IRequest;
+public record CreateWordCommand(int LanguageId, int GenderId, string Name, string Translation, string? Transcription)
+    : IRequest;

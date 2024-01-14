@@ -1,8 +1,8 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
+using Dictionary.Api.Controllers.Words.Requests;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
-using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using FluentAssertions;
 using Flurl;
 using Xunit;
@@ -18,14 +18,14 @@ public class WordsControllerTests(WordsControllerWebApplicationFactory<Program> 
 
     [Theory]
     [AutoData]
-    public async Task Create_WhenRequestIsValid_CreatesNewWord(CreateWordDto dto)
+    public async Task Create_WhenRequestIsValid_CreatesNewWord(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
         var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
-        var createResponse = await client.PostAsJsonAsync(createUri, dto);
+        var createResponse = await client.PostAsJsonAsync(createUri, request);
 
         // Assert
         createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
