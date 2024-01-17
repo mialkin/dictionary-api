@@ -1,5 +1,6 @@
 using Dictionary.Api.Configurations;
 using Dictionary.Api.Metrics;
+using Microsoft.OpenApi.Models;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +15,13 @@ var services = builder.Services;
 
 services.AddControllers();
 services.AddRouting(options => options.LowercaseUrls = true);
-services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
+
+services.AddSwaggerGen(options =>
+{
+    options.DescribeAllParametersInCamelCase();
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "Dictionary API", Version = "v1" });
+});
+
 services.ConfigureApplication(builder.Configuration);
 services.ConfigureMetrics();
 
@@ -27,6 +34,7 @@ application.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint(url: "/swagger/v1/swagger.json", name: "v1");
     options.RoutePrefix = string.Empty;
+    options.DocumentTitle = "Dictionary API";
 });
 
 application.MapControllers();
