@@ -13,9 +13,8 @@ builder.Host.UseSerilog((context, configuration) =>
 var services = builder.Services;
 
 services.AddControllers();
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 services.AddRouting(options => options.LowercaseUrls = true);
+services.AddSwaggerGen(options => { options.DescribeAllParametersInCamelCase(); });
 services.ConfigureApplication(builder.Configuration);
 services.ConfigureMetrics();
 
@@ -30,8 +29,8 @@ application.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-application.UseRouting();
 application.MapControllers();
+application.UseRouting();
 application
     .UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
