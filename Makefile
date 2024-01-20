@@ -1,6 +1,3 @@
-export PROJECT=Dictionary.Api.Infrastructure.Implementation.Database
-export STARTUP_PROJECT=Dictionary.Api
-
 .PHONY: copy-env
 copy-env:
 	cp -n .env.example .env | true
@@ -15,4 +12,6 @@ shutdown-infrastructure:
 
 .PHONY: update-database
 update-database:
-	dotnet ef database update --project src/${PROJECT} --startup-project src/${STARTUP_PROJECT}
+	dotnet ef database update \
+        --project src/Dictionary.Api.Infrastructure.Implementation.Database \
+        --startup-project src/Dictionary.Api
