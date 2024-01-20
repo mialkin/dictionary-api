@@ -7,8 +7,6 @@
 - [↑ .NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
 - [↑ EF Core command-line tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
 
-
-
 ## Run application
 
 1\. Run application infrastructure:
@@ -16,7 +14,7 @@
 ```bash
 make run-infrastructure
 
-# To shutdown infrastructure when you don't need it run:
+# Shutdown infrastructure:
 # make shutdown-infrastructure
 ```
 
@@ -25,7 +23,7 @@ make run-infrastructure
 ```bash
 dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=3300;Database=dictionary_api" --project "src/Dictionary.Api"
 
-# If you need to list or clean user secrets, for some reason, run:
+# List and clean secrets:
 # dotnet user-secrets list --project "src/Dictionary.Api"
 # dotnet user-secrets clear --project "src/Dictionary.Api"
 ```
