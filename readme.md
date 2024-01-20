@@ -23,7 +23,7 @@ make run-infrastructure
 ```bash
 dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=3300;Database=dictionary_api" --project "src/Dictionary.Api"
 
-# List and clean secrets:
+# List and clear secrets:
 # dotnet user-secrets list --project "src/Dictionary.Api"
 # dotnet user-secrets clear --project "src/Dictionary.Api"
 ```
