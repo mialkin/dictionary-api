@@ -11,22 +11,30 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
         SearchWordsQuery request,
         CancellationToken cancellationToken)
     {
-        var queryable = readOnlyDatabaseContext.Words;
+        var queryable = readOnlyDatabaseContext.Words.Where(x => x.LanguageId == request.LanguageId);
         // TODO Use Elasticsearch for storing words and translations?
 
+        if (!string.IsNullOrWhiteSpace(request.Term))
+        {
+            queryable = queryable
+                .Where(x => x.Name.StartsWith(request.Term))
+                .OrderBy(x => x.Name);
+        }
+        else
+        {
+            queryable = queryable.OrderByDescending(x => x.CreatedAt); // TODO Add database index
+        }
+
         var words = await queryable
-            .Where(x => x.LanguageId == request.LanguageId)
-            .OrderByDescending(x => x.CreatedAt) // TODO Add database index
-            .Select(x =>
-                new SearchWordsDto(
-                    x.Id,
-                    x.LanguageId,
-                    x.GenderId,
-                    x.Name,
-                    x.Translation,
-                    x.Transcription,
-                    x.CreatedAt,
-                    x.UpdatedAt)
+            .Select(x => new SearchWordsDto(
+                x.Id,
+                x.LanguageId,
+                x.GenderId,
+                x.Name,
+                x.Translation,
+                x.Transcription,
+                x.CreatedAt,
+                x.UpdatedAt)
             )
             .Take(100) // TODO Move to specification and reuse across different methods?
             // TODO Implement client pagination with default value set on the client and on the server

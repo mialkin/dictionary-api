@@ -46,22 +46,21 @@ public class WordsController : ApplicationController
     }
 
     [HttpDelete("delete")]
-    public async Task<IActionResult> Delete([FromBody] Guid id, CancellationToken cancellationToken)
-    // TODO Use DeleteWordRequest instead just plain id
+    public async Task<IActionResult> Delete([FromBody] DeleteWordRequest request, CancellationToken cancellationToken)
     {
-        var unitResult = await Sender.Send(new DeleteWordCommand(id), cancellationToken);
+        var unitResult = await Sender.Send(new DeleteWordCommand(request.Id), cancellationToken);
         return FromUnitResult(unitResult);
     }
 
     [HttpGet("search")]
     public async Task<IActionResult> Search(
         [FromQuery] int languageId,
-        [FromQuery] int term,
+        [FromQuery] string? term,
         CancellationToken cancellationToken)
     {
         // TODO Make Language an entity and validate if languageId > 0
         // TODO Return SuccessResponse with request ID, i.e. trace ID
-        var result = await Sender.Send(new SearchWordsQuery(languageId), cancellationToken);
+        var result = await Sender.Send(new SearchWordsQuery(languageId, term), cancellationToken);
         return Ok(result);
     }
 }
