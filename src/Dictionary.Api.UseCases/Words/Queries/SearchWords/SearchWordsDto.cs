@@ -1,6 +1,6 @@
-namespace Dictionary.Api.UseCases.Words.Queries.ListWords;
+namespace Dictionary.Api.UseCases.Words.Queries.SearchWords;
 
-public record ListWordsDto(
+public record SearchWordsDto(
     Guid Id,
     int LanguageId,
     int GenderId,

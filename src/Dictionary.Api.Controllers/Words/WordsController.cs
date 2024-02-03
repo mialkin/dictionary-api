@@ -4,7 +4,7 @@ using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 using Dictionary.Api.UseCases.Words.Queries.GetWord;
-using Dictionary.Api.UseCases.Words.Queries.ListWords;
+using Dictionary.Api.UseCases.Words.Queries.SearchWords;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Api.Controllers.Words;
@@ -53,12 +53,15 @@ public class WordsController : ApplicationController
         return FromUnitResult(unitResult);
     }
 
-    [HttpGet("list")]
-    public async Task<IActionResult> List([FromQuery] int languageId, CancellationToken cancellationToken)
+    [HttpGet("search")]
+    public async Task<IActionResult> Search(
+        [FromQuery] int languageId,
+        [FromQuery] int term,
+        CancellationToken cancellationToken)
     {
         // TODO Make Language an entity and validate if languageId > 0
         // TODO Return SuccessResponse with request ID, i.e. trace ID
-        var result = await Sender.Send(new ListWordsQuery(languageId), cancellationToken);
+        var result = await Sender.Send(new SearchWordsQuery(languageId), cancellationToken);
         return Ok(result);
     }
 }

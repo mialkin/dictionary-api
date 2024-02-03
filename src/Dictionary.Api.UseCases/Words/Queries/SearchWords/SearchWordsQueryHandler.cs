@@ -2,13 +2,13 @@ using Dictionary.Api.Infrastructure.Interfaces.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Dictionary.Api.UseCases.Words.Queries.ListWords;
+namespace Dictionary.Api.UseCases.Words.Queries.SearchWords;
 
-internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
-    : IRequestHandler<ListWordsQuery, IReadOnlyCollection<ListWordsDto>>
+internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
+    : IRequestHandler<SearchWordsQuery, IReadOnlyCollection<SearchWordsDto>>
 {
-    public async Task<IReadOnlyCollection<ListWordsDto>> Handle(
-        ListWordsQuery request,
+    public async Task<IReadOnlyCollection<SearchWordsDto>> Handle(
+        SearchWordsQuery request,
         CancellationToken cancellationToken)
     {
         var queryable = readOnlyDatabaseContext.Words;
@@ -18,7 +18,7 @@ internal class ListWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCo
             .Where(x => x.LanguageId == request.LanguageId)
             .OrderByDescending(x => x.CreatedAt) // TODO Add database index
             .Select(x =>
-                new ListWordsDto(
+                new SearchWordsDto(
                     x.Id,
                     x.LanguageId,
                     x.GenderId,
