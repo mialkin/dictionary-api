@@ -14,10 +14,10 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
         var queryable = readOnlyDatabaseContext.Words.Where(x => x.LanguageId == request.LanguageId);
         // TODO Use Elasticsearch for storing words and translations?
 
-        if (!string.IsNullOrWhiteSpace(request.Term))
+        if (!string.IsNullOrWhiteSpace(request.Query))
         {
             queryable = queryable
-                .Where(x => x.Name.StartsWith(request.Term))
+                .Where(x => x.Name.StartsWith(request.Query))
                 .OrderBy(x => x.Name);
         }
         else

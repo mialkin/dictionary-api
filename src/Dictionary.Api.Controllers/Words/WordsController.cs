@@ -55,12 +55,12 @@ public class WordsController : ApplicationController
     [HttpGet("search")]
     public async Task<IActionResult> Search(
         [FromQuery] int languageId,
-        [FromQuery] string? term,
+        [FromQuery] string? query,
         CancellationToken cancellationToken)
     {
         // TODO Make Language an entity and validate if languageId > 0
         // TODO Return SuccessResponse with request ID, i.e. trace ID
-        var result = await Sender.Send(new SearchWordsQuery(languageId, term), cancellationToken);
+        var result = await Sender.Send(new SearchWordsQuery(languageId, query), cancellationToken);
         return Ok(result);
     }
 }
