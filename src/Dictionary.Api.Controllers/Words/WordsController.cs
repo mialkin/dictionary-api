@@ -5,10 +5,12 @@ using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 using Dictionary.Api.UseCases.Words.Queries.GetWord;
 using Dictionary.Api.UseCases.Words.Queries.SearchWords;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Dictionary.Api.Controllers.Words;
 
+[Authorize]
 public class WordsController : ApplicationController
 {
     [HttpPost("create")]

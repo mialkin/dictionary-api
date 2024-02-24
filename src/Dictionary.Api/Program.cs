@@ -1,4 +1,7 @@
+using System.Net;
 using Dictionary.Api.Configurations;
+using Dictionary.Api.Configurations.DataProtection;
+using Dictionary.Api.Constants;
 using Dictionary.Api.Metrics;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -12,6 +15,20 @@ builder.Host.UseSerilog((context, configuration) =>
 });
 
 var services = builder.Services;
+
+services.ConfigureDataProtection(builder.Configuration);
+services.AddAuthentication(DefaultAuthenticationScheme.Name)
+    .AddCookie(DefaultAuthenticationScheme.Name, options =>
+    {
+        options.Cookie.Name = "Dictionary.Session";
+        options.Events.OnRedirectToLogin = context =>
+        {
+            context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            return Task.CompletedTask;
+        };
+    });
+
+services.AddAuthorization();
 
 services.AddControllers();
 services.AddRouting(options => options.LowercaseUrls = true);
@@ -27,6 +44,10 @@ services.ConfigureMetrics();
 
 var application = builder.Build();
 
+application.UseRouting();
+application.UseAuthentication();
+application.UseAuthorization();
+
 application.UseSerilogRequestLogging();
 
 application.UseSwagger();
@@ -38,7 +59,6 @@ application.UseSwaggerUI(options =>
 });
 
 application.MapControllers();
-application.UseRouting();
 application
     .UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
