@@ -32,11 +32,14 @@ test:
   services:
     - name: postgres:16.1
       alias: postgres
+    - name: redis:7.2.4
+      alias: redis
   variables:
     POSTGRES_DB: dictionary_api
     POSTGRES_USER: dictionary_api
     POSTGRES_PASSWORD: dictionary_api
     ASPNETCORE_ENVIRONMENT: GitLab
+    ALLOW_EMPTY_PASSWORD: "yes" # Redis
   script:
     - *restore_nuget_packages
     - make update-database
