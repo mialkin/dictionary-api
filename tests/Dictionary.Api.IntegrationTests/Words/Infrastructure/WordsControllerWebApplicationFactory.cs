@@ -1,5 +1,8 @@
+using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Dictionary.Api.IntegrationTests.Words.Infrastructure;
 
@@ -10,5 +13,10 @@ public class WordsControllerWebApplicationFactory<TEntryPoint> : WebApplicationF
     {
         var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? HostEnvironment.Ide;
         builder.UseEnvironment(environment);
+
+        builder.ConfigureTestServices(services =>
+        {
+            services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+        });
     }
 }
