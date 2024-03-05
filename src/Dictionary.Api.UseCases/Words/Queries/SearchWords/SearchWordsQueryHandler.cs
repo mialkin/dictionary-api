@@ -36,7 +36,7 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
                 x.CreatedAt,
                 x.UpdatedAt)
             )
-            .Take(100) // TODO Move to specification and reuse across different methods?
+            .Take(50) // TODO Move to specification and reuse across different methods?
             // TODO Implement client pagination with default value set on the client and on the server
             .ToListAsync(cancellationToken);
 
