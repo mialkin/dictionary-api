@@ -21,6 +21,6 @@ public static class SearchWordsEndpoint
             // TODO Return SuccessResponse with request ID, i.e. trace ID
             var result = await sender.Send(new SearchWordsQuery(languageId, query), cancellationToken);
             return Results.Ok(Envelope.Ok(result));
-        }).RequireAuthorization();
+        });
     }
 }
