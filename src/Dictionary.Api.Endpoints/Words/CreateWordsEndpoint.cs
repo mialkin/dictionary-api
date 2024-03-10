@@ -1,4 +1,4 @@
-using Dictionary.Api.Controllers.Words.Requests;
+using Dictionary.Api.Endpoints.Words.Requests;
 using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Dictionary.Api.Controllers.Words;
+namespace Dictionary.Api.Endpoints.Words;
 
 public static class CreateWordsEndpoint
 {

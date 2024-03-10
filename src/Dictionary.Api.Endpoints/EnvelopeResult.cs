@@ -1,7 +1,7 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Dictionary.Api.Controllers;
+namespace Dictionary.Api.Endpoints;
 
 public sealed class EnvelopeResult(Envelope envelope, HttpStatusCode statusCode) : IActionResult
 {

@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
-using Dictionary.Api.Controllers.Words.Requests;
+using Dictionary.Api.Endpoints.Words.Requests;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using FluentAssertions;
 using Flurl;
@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Dictionary.Api.IntegrationTests.Words;
 
-public class WordsControllerTests(WordsControllerWebApplicationFactory<Program> factory)
+public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> factory)
     : IClassFixture<WordsControllerWebApplicationFactory<Program>>
 {
     private const string BasePath = "api/words";

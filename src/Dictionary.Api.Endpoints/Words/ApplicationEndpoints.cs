@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace Dictionary.Api.Controllers.Words;
+namespace Dictionary.Api.Endpoints.Words;
 
 public static class ApplicationEndpoints
 {

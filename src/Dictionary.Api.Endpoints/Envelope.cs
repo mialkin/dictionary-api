@@ -1,6 +1,6 @@
 using Dictionary.Api.Domain;
 
-namespace Dictionary.Api.Controllers;
+namespace Dictionary.Api.Endpoints;
 
 public class Envelope
 {

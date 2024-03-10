@@ -1,4 +1,4 @@
-namespace Dictionary.Api.Controllers.Words.Requests;
+namespace Dictionary.Api.Endpoints.Words.Requests;
 
 public record UpdateWordRequest
 {
