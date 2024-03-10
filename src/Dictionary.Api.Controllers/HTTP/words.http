@@ -13,5 +13,5 @@ Content-Type: application/json
     "transcription": "'æpl"
 }
 
-### List all words
-GET {{baseUrl}}/words/list?languageId=1
+### Search words
+GET {{baseUrl}}/words/search?languageId=1
