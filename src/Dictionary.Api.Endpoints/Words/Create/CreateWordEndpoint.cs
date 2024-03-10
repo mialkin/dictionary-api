@@ -1,4 +1,3 @@
-using Dictionary.Api.Endpoints.Words.Requests;
 using Dictionary.Api.UseCases.Words.Commands.CreateWord;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -6,11 +5,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Dictionary.Api.Endpoints.Words;
+namespace Dictionary.Api.Endpoints.Words.Create;
 
-public static class CreateWordsEndpoint
+public static class CreateWordEndpoint
 {
-    public static void MapCreateWords(this IEndpointRouteBuilder builder)
+    public static void MapCreateWord(this IEndpointRouteBuilder builder)
     {
         builder.MapPost("create", async (
             [FromBody] CreateWordRequest request,

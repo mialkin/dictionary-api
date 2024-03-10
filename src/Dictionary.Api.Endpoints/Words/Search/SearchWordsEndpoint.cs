@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Dictionary.Api.Endpoints.Words;
+namespace Dictionary.Api.Endpoints.Words.Search;
 
 public static class SearchWordsEndpoint
 {

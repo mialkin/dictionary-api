@@ -1,4 +1,3 @@
-using Dictionary.Api.Endpoints.Words.Requests;
 using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
@@ -6,7 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 
-namespace Dictionary.Api.Endpoints.Words;
+namespace Dictionary.Api.Endpoints.Words.Delete;
 
 public static class DeleteWordEndpoint
 {

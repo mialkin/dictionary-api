@@ -1,7 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
-using Dictionary.Api.Endpoints.Words.Requests;
+using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using FluentAssertions;
 using Flurl;
