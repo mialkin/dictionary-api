@@ -14,13 +14,17 @@ internal class UpdateWordCommandHandler(IDatabaseContext databaseContext)
         var word = await databaseContext.Words.FindAsync(request.Id, cancellationToken);
 
         if (word is null)
+        {
             return UnitResult.Failure(Errors.General.NotFound());
+        }
 
-        var unitResult = Word.CanUpdate(request.Translation, request.Transcription);
+        var unitResult = Word.CanUpdate(request.Transcription, request.Translation);
         if (unitResult.IsFailure)
+        {
             return unitResult.Error;
+        }
 
-        word.Update(request.Translation, request.Transcription);
+        word.Update(request.Transcription, request.Translation);
         await databaseContext.SaveChangesAsync(cancellationToken);
 
         return UnitResult.Success<Error>();

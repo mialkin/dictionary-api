@@ -23,8 +23,8 @@ public class WordsController : ApplicationController
             request.Translation,
             request.Transcription);
 
-        await Sender.Send(command, cancellationToken);
-        return Ok();
+        var unitResult = await Sender.Send(command, cancellationToken);
+        return FromUnitResult(unitResult);
     }
 
     [HttpGet("get")]

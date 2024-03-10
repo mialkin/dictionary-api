@@ -4,7 +4,8 @@ public static class Constants
 {
     public static class Words
     {
-        public const int TranslationMaxLength = 2000;
+        public const int NameMaxLength = 100;
         public const int TranscriptionMaxLength = 100;
+        public const int TranslationMaxLength = 500;
     }
 }

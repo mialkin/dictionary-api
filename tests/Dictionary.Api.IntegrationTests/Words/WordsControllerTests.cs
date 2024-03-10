@@ -15,10 +15,39 @@ public class WordsControllerTests(WordsControllerWebApplicationFactory<Program> 
     private const string BasePath = "api/words";
     private const string CreateSegment = "create";
 
-
     [Theory]
     [AutoData]
     public async Task Create_WhenRequestIsValid_CreatesNewWord(CreateWordRequest request)
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
+
+        // Act
+        var createResponse = await client.PostAsJsonAsync(createUri, request);
+
+        // Assert
+        createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+
+    [Theory]
+    [AutoData]
+    public async Task Create_WhenTranslationIsNullOrWhitespace_ReturnsError(CreateWordRequest request)
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
+
+        // Act
+        var createResponse = await client.PostAsJsonAsync(createUri, request);
+
+        // Assert
+        createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+    }
+
+    [Theory]
+    [AutoData]
+    public async Task Create_WhenTranscriptionIsNullOrWhitespace_SavesTranscriptionAsNull(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();

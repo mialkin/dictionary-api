@@ -36,38 +36,57 @@ public class Word
     public DateTime CreatedAt { get; private set; }
     public DateTime UpdatedAt { get; private set; }
 
-    public bool CanCreate()
+    private static bool NameIsValid(string name)
     {
-        return true; // TODO Implement
+        return !string.IsNullOrWhiteSpace(name) && name.Length <= Constants.Words.NameMaxLength;
     }
 
-    public void Create()
+    public static Word Create(int languageId, string name, string? transcription, string translation)
     {
-        // TODO Call CanCreate(). Call private/protected constructor?
+        var unitResult = CanCreate(name, transcription, translation);
+        if (unitResult.IsFailure)
+            throw new InvalidOperationException();
+
+        return new Word(languageId, 0, name, translation, transcription);
     }
 
-    public static UnitResult<Error> CanUpdate(string translation, string? transcription)
+    public static UnitResult<Error> CanCreate(string name, string? transcription, string translation)
     {
-        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
-            return Errors.Word.TranslationIsInvalid();
+        if (!NameIsValid(name))
+            return Errors.Word.NameIsInvalid();
 
-        // TODO Make translation a value object and move length check inside of it?
-
-        if (!string.IsNullOrEmpty(transcription)
+        if (!string.IsNullOrWhiteSpace(transcription)
             && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
             return Errors.Word.TranscriptionIsInvalid();
+
+        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
+            return Errors.Word.TranslationIsInvalid();
 
         return UnitResult.Success<Error>();
     }
 
-    public void Update(string translation, string? transcription)
+    public void Update(string? transcription, string translation)
     {
-        var unitResult = CanUpdate(translation, transcription);
+        var unitResult = CanUpdate(transcription, translation);
         if (unitResult.IsFailure)
             throw new InvalidOperationException(); // Pass error returned by CanUpdate and word ID
 
-        Translation = translation;
         Transcription = transcription;
+        Translation = translation;
         UpdatedAt = DateTime.UtcNow; // TODO Use ISystemClock
+    }
+
+    public static UnitResult<Error> CanUpdate(string? transcription, string translation)
+    {
+        if (!string.IsNullOrWhiteSpace(transcription)
+            && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
+            return Errors.Word.TranscriptionIsInvalid();
+
+        // TODO Make translation a value object and move length check inside of it?
+
+        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
+            return Errors.Word.TranslationIsInvalid();
+
+        return UnitResult.Success<Error>();
     }
 }
