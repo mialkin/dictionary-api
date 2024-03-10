@@ -2,6 +2,7 @@ using System.Net;
 using Dictionary.Api.Configurations;
 using Dictionary.Api.Configurations.DataProtection;
 using Dictionary.Api.Constants;
+using Dictionary.Api.Controllers.Words;
 using Dictionary.Api.Metrics;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -33,6 +34,7 @@ services.AddAuthorization();
 services.AddControllers();
 services.AddRouting(options => options.LowercaseUrls = true);
 
+services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options =>
 {
     options.DescribeAllParametersInCamelCase();
@@ -58,7 +60,8 @@ application.UseSwaggerUI(options =>
     options.DocumentTitle = "Dictionary API";
 });
 
-application.MapControllers();
+application.MapApplicationEndpoints();
+
 application
     .UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
