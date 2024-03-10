@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.OpenApi.Models;
 
 namespace Dictionary.Api.Endpoints.Words.Update;
 
@@ -12,17 +13,19 @@ public static class UpdateWordEndpoint
     public static void MapUpdateWords(this IEndpointRouteBuilder builder)
     {
         builder.MapPatch("update", async (
-            [FromBody] UpdateWordRequest request,
-            ISender sender,
-            CancellationToken cancellationToken) =>
-        {
-            var result = await sender.Send(
-                request: new UpdateWordCommand(request.Id, request.Name, request.Transcription, request.Translation),
-                cancellationToken);
+                [FromBody] UpdateWordRequest request,
+                ISender sender,
+                CancellationToken cancellationToken) =>
+            {
+                var result = await sender.Send(
+                    request: new UpdateWordCommand(request.Id, request.Name, request.Transcription,
+                        request.Translation),
+                    cancellationToken);
 
-            return result.IsSuccess
-                ? Results.Ok()
-                : Results.BadRequest(result.Error);
-        });
+                return result.IsSuccess
+                    ? Results.Ok()
+                    : Results.BadRequest(result.Error);
+            })
+            .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Update word" });
     }
 }

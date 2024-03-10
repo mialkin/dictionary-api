@@ -18,8 +18,8 @@ public static class ApplicationEndpoints
             .RequireAuthorization();
 
         wordsGroupBuilder.MapSearchWords();
-        wordsGroupBuilder.MapCreateWord();
         wordsGroupBuilder.MapGetWord();
+        wordsGroupBuilder.MapCreateWord();
         wordsGroupBuilder.MapUpdateWords();
         wordsGroupBuilder.MapDeleteWord();
     }
