@@ -22,7 +22,7 @@ public static class SearchWordsEndpoint
                 // TODO Make Language an entity and validate if languageId > 0
                 // TODO Return SuccessResponse with request ID, i.e. trace ID
                 var result = await sender.Send(new SearchWordsQuery(languageId, query), cancellationToken);
-                return Results.Ok(Envelope.Ok(result));
+                return Results.Ok(result);
             })
             .Produces<IReadOnlyCollection<SearchWordsDto>>()
             .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Get words by filter" });
