@@ -18,7 +18,7 @@ public sealed class ErrorTests
             .SelectMany(x => x)
             .ToList();
 
-        int numberOfUniqueCodes = methods.Select(GetErrorCode)
+        var numberOfUniqueCodes = methods.Select(GetErrorCode)
             .Distinct()
             .Count();
 
@@ -27,7 +27,7 @@ public sealed class ErrorTests
 
     private static string GetErrorCode(MethodInfo method)
     {
-        object[] parameters = method.GetParameters()
+        var parameters = method.GetParameters()
             .Select<ParameterInfo, object>(x =>
             {
                 if (x.ParameterType == typeof(string))
