@@ -1,9 +1,9 @@
 using Dictionary.Api.Domain;
 using Dictionary.Api.UseCases.Words.Queries.GetWord;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.OpenApi.Models;
 
@@ -14,11 +14,12 @@ public static class GetWordEndpoint
     public static void MapGetWord(this IEndpointRouteBuilder builder)
     {
         builder.MapGet("get", async (
-                [FromQuery] Guid id,
+                [AsParameters] GetWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var result = await sender.Send(new GetWordQuery(id), cancellationToken);
+                var query = request.Adapt<GetWordQuery>();
+                var result = await sender.Send(query, cancellationToken);
 
                 return result.Value.HasValue
                     ? Results.Ok(result.Value.Value)

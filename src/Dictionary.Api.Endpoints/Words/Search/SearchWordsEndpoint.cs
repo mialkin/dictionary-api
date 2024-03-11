@@ -1,4 +1,5 @@
 using Dictionary.Api.UseCases.Words.Queries.SearchWords;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -14,14 +15,14 @@ public static class SearchWordsEndpoint
     {
         builder
             .MapGet("search", async (
-                [FromQuery] int languageId,
-                [FromQuery] string? query,
+                [AsParameters] SearchWordsRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
                 // TODO Make Language an entity and validate if languageId > 0
                 // TODO Return SuccessResponse with request ID, i.e. trace ID
-                var result = await sender.Send(new SearchWordsQuery(languageId, query), cancellationToken);
+                var query = request.Adapt<SearchWordsQuery>();
+                var result = await sender.Send(query, cancellationToken);
                 return Results.Ok(result);
             })
             .Produces<IReadOnlyCollection<SearchWordsDto>>()
