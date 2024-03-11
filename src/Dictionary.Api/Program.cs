@@ -3,7 +3,6 @@ using Dictionary.Api.Configurations;
 using Dictionary.Api.Configurations.DataProtection;
 using Dictionary.Api.Constants;
 using Dictionary.Api.Endpoints;
-using Dictionary.Api.Endpoints.Words;
 using Dictionary.Api.Metrics;
 using Microsoft.OpenApi.Models;
 using Serilog;
