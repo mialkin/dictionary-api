@@ -47,7 +47,7 @@ public class Word
         if (unitResult.IsFailure)
             throw new InvalidOperationException();
 
-        return new Word(languageId, 0, name, translation, transcription);
+        return new Word(languageId, genderId: 0, name, translation, transcription);
     }
 
     public static UnitResult<Error> CanCreate(string name, string? transcription, string translation)
