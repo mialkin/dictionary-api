@@ -10,7 +10,7 @@ namespace Dictionary.Api.Endpoints.Words.Update;
 
 public static class UpdateWordEndpoint
 {
-    public static void MapUpdateWords(this IEndpointRouteBuilder builder)
+    public static void MapUpdateWord(this IEndpointRouteBuilder builder)
     {
         builder.MapPatch("update", async (
                 [FromBody] UpdateWordRequest request,

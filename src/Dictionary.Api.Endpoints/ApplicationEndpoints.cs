@@ -20,7 +20,7 @@ public static class ApplicationEndpoints
         wordsGroupBuilder.MapSearchWords();
         wordsGroupBuilder.MapGetWord();
         wordsGroupBuilder.MapCreateWord();
-        wordsGroupBuilder.MapUpdateWords();
+        wordsGroupBuilder.MapUpdateWord();
         wordsGroupBuilder.MapDeleteWord();
     }
 }
