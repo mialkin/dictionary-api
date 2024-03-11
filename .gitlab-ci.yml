@@ -6,6 +6,7 @@ variables:
 
 stages:
   - build
+  - check-format
   - test
   - publish-migrations
   - publish
@@ -20,6 +21,19 @@ build:
   script:
     - *restore_nuget_packages
     - dotnet build --no-restore --configuration Release
+  cache:
+    key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
+    paths:
+      - $NUGET_PACKAGES_DIRECTORY
+
+check-format:
+  stage: check-format
+  interruptible: true
+  image: $DOTNET_SDK_IMAGE
+  script:
+    - *restore_nuget_packages
+    - dotnet format --version
+    - dotnet format --verify-no-changes --no-restore
   cache:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
     paths:
