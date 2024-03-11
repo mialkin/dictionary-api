@@ -1,4 +1,5 @@
 using Dictionary.Api.UseCases.Words.Commands.DeleteWord;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -17,7 +18,8 @@ public static class DeleteWordEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var result = await sender.Send(new DeleteWordCommand(request.Id), cancellationToken);
+                var command = request.Adapt<DeleteWordCommand>();
+                var result = await sender.Send(command, cancellationToken);
 
                 return result.IsSuccess
                     ? Results.Ok()

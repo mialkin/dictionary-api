@@ -13,6 +13,11 @@ public static class ApplicationEndpoints
 {
     public static void MapApplicationEndpoints(this IEndpointRouteBuilder builder)
     {
+        MapWordsEndpoints(builder);
+    }
+
+    private static void MapWordsEndpoints(IEndpointRouteBuilder builder)
+    {
         var wordsGroupBuilder = builder.MapGroup("api/words")
             .WithTags("Words")
             .RequireAuthorization();

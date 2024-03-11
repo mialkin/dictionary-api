@@ -5,5 +5,5 @@ obj/
 .idea
 *.DotSettings.user
 
-# Environment file
+# Environment files
 .env

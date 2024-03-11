@@ -1,4 +1,5 @@
 using Dictionary.Api.UseCases.Words.Commands.CreateWord;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -17,13 +18,7 @@ public static class CreateWordEndpoint
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var command = new CreateWordCommand(
-                    request.LanguageId,
-                    request.GenderId,
-                    request.Name,
-                    request.Translation,
-                    request.Transcription);
-
+                var command = request.Adapt<CreateWordCommand>();
                 var result = await sender.Send(command, cancellationToken);
 
                 return result.IsSuccess

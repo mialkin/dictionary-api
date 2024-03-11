@@ -1,4 +1,5 @@
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
+using Mapster;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -12,16 +13,16 @@ public static class UpdateWordEndpoint
 {
     public static void MapUpdateWord(this IEndpointRouteBuilder builder)
     {
+        // TODO Move endpoint names to WordEndpoints class
         builder.MapPatch("update", async (
                 [FromBody] UpdateWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>
             {
-                var result = await sender.Send(
-                    request: new UpdateWordCommand(request.Id, request.Name, request.Transcription,
-                        request.Translation),
-                    cancellationToken);
+                var command = request.Adapt<UpdateWordCommand>();
+                var result = await sender.Send(command, cancellationToken);
 
+                // TODO Implement something like Result.FromUnitResult(result);
                 return result.IsSuccess
                     ? Results.Ok()
                     : Results.BadRequest(result.Error);
