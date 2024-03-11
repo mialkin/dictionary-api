@@ -14,6 +14,12 @@ max_line_length = 120
 [*.cs]
 indent_size = 4
 
+# Use var instead of explicit type
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008
+csharp_style_var_for_built_in_types = true:error
+csharp_style_var_when_type_is_apparent = true:error
+csharp_style_var_elsewhere = true:error
+
 [*.csproj]
 indent_size = 2
 
