@@ -1,19 +1,23 @@
-# editorconfig.org
+# https://editorconfig.org/
 
-# Top-most EditorConfig file
 root = true
 
 [*]
+# https://spec.editorconfig.org/#supported-pairs
 charset = utf-8
 end_of_line = lf
-insert_final_newline = true
 indent_style = space
-indent_size = 4
+insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 120
 
+[*.cs]
+indent_size = 4
+
 [*.csproj]
 indent_size = 2
+
+# Setting for JetBrains Rider code formatter: https://intellij-support.jetbrains.com/hc/en-us/community/posts/207060005-Code-formatting-preserve-whitespace-in-self-closing-tags
 ij_xml_space_inside_empty_tag = true
 
 [*.json]
