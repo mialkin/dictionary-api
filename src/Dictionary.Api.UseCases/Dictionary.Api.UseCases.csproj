@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Dictionary.Api.Infrastructure.Interfaces.Database\Dictionary.Api.Infrastructure.Interfaces.Database.csproj"/>
+    <ProjectReference Include="..\Dictionary.Api.Infrastructure.Interfaces.Database\Dictionary.Api.Infrastructure.Interfaces.Database.csproj" />
   </ItemGroup>
 
 </Project>
