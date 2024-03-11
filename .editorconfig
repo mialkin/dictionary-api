@@ -7,13 +7,12 @@ root = true
 charset = utf-8
 end_of_line = lf
 indent_style = space
+indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
 max_line_length = 120
 
 [*.cs]
-indent_size = 4
-
 # Use `var` instead of explicit type
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0007-ide0008
 csharp_style_var_for_built_in_types = true:error
@@ -27,10 +26,10 @@ dotnet_separate_import_directive_groups = false
 
 # Avoid using `this.`
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009
-dotnet_style_qualification_for_field = false:suggestion
-dotnet_style_qualification_for_property = false:suggestion
-dotnet_style_qualification_for_method = false:suggestion
-dotnet_style_qualification_for_event = false:suggestion
+dotnet_style_qualification_for_field = false:error
+dotnet_style_qualification_for_property = false:error
+dotnet_style_qualification_for_method = false:error
+dotnet_style_qualification_for_event = false:error
 
 # Use language keywords like `int` instead of framework type names like `Int32` for type references
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0049
