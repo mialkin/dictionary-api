@@ -13,8 +13,10 @@ namespace Dictionary.Api.IntegrationTests.Words;
 public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> factory)
     : IClassFixture<WordsControllerWebApplicationFactory<Program>>
 {
-    private const string s_basePath = "api/words";
-    private const string s_createSegment = "create";
+    private const string BasePath = "api/words";
+    private const string CreateSegment = "create";
+
+    private static readonly string s_myField = DateTime.Now.ToString(CultureInfo.InvariantCulture);
 
     [Theory]
     [AutoData]
@@ -22,7 +24,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = s_basePath.AppendPathSegment(s_createSegment);
+        var createUri = BasePath.AppendPathSegment(CreateSegment +s_myField);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
@@ -37,7 +39,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = s_basePath.AppendPathSegment(s_createSegment);
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
@@ -52,7 +54,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = s_basePath.AppendPathSegment(s_createSegment);
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
