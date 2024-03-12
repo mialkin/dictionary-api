@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
@@ -16,15 +15,13 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     private const string BasePath = "api/words";
     private const string CreateSegment = "create";
 
-    private static readonly string s_myField = DateTime.Now.ToString(CultureInfo.InvariantCulture);
-
     [Theory]
     [AutoData]
     public async Task Create_WhenRequestIsValid_CreatesNewWord(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment +s_myField);
+        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
