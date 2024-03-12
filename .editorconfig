@@ -28,6 +28,27 @@ dotnet_separate_import_directive_groups = false
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0005
 dotnet_diagnostic.IDE0005.severity = error
 
+# Static fields are camelCase and start with `s_`
+dotnet_naming_rule.static_fields_should_be_camel_case.severity = error
+dotnet_naming_rule.static_fields_should_be_camel_case.symbols = static_fields
+dotnet_naming_rule.static_fields_should_be_camel_case.style = static_field_style
+
+dotnet_naming_symbols.static_fields.applicable_kinds = field
+dotnet_naming_symbols.static_fields.required_modifiers = static
+
+dotnet_naming_style.static_field_style.capitalization = camel_case
+dotnet_naming_style.static_field_style.required_prefix = s_
+
+# Instance fields are camelCase and start with `_`
+dotnet_naming_rule.instance_fields_should_be_camel_case.severity = error
+dotnet_naming_rule.instance_fields_should_be_camel_case.symbols = instance_fields
+dotnet_naming_rule.instance_fields_should_be_camel_case.style = instance_field_style
+
+dotnet_naming_symbols.instance_fields.applicable_kinds = field
+
+dotnet_naming_style.instance_field_style.capitalization = camel_case
+dotnet_naming_style.instance_field_style.required_prefix = _
+
 # Avoid using `this.`
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0003-ide0009
 dotnet_style_qualification_for_field = false:error

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
@@ -12,8 +13,8 @@ namespace Dictionary.Api.IntegrationTests.Words;
 public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> factory)
     : IClassFixture<WordsControllerWebApplicationFactory<Program>>
 {
-    private const string BasePath = "api/words";
-    private const string CreateSegment = "create";
+    private const string s_basePath = "api/words";
+    private const string s_createSegment = "create";
 
     [Theory]
     [AutoData]
@@ -21,7 +22,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
+        var createUri = s_basePath.AppendPathSegment(s_createSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
@@ -36,7 +37,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
+        var createUri = s_basePath.AppendPathSegment(s_createSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
@@ -51,7 +52,7 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
+        var createUri = s_basePath.AppendPathSegment(s_createSegment);
 
         // Act
         var createResponse = await client.PostAsJsonAsync(createUri, request);
