@@ -80,6 +80,10 @@ dotnet_style_qualification_for_event = false:error
 dotnet_style_predefined_type_for_locals_parameters_members = true:error
 dotnet_style_predefined_type_for_member_access = true:error
 
+# All diagnostics of XML documentation comments has been disabled due to the current project configuration
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA0001.md
+dotnet_diagnostic.SA0001.severity = silent
+
 # A C# code element is missing a documentation header
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1600.md
 dotnet_diagnostic.SA1600.severity = silent
