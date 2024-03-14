@@ -10,7 +10,8 @@ internal class DatabaseContext : DbContext, IDatabaseContext
     public DbSet<Word> Words { get; set; }
 
 #pragma warning disable CS8618
-    public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+    public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        : base(options)
 #pragma warning restore CS8618
     {
     }
@@ -27,11 +28,14 @@ internal class DatabaseContext : DbContext, IDatabaseContext
         modelBuilder.Entity<Word>().HasData(
             CreateWord(1, 0, "apple", null, "яблоко"),
             CreateWord(1, 0, "orange", null, "апельсин"),
-            CreateWord(1, 0, "banana", "bə'nɑːnə", "банан")
-        );
+            CreateWord(1, 0, "banana", "bə'nɑːnə", "банан"));
     }
 
-    private static Word CreateWord(int languageId, int genderId, string name, string? transcription,
+    private static Word CreateWord(
+        int languageId,
+        int genderId,
+        string name,
+        string? transcription,
         string translation) =>
         new(languageId, genderId, name, translation, transcription);
 }

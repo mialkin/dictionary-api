@@ -13,7 +13,9 @@ internal class DeleteWordCommandHandler(IDatabaseContext databaseContext)
     {
         var word = await databaseContext.Words.FirstOrDefaultAsync(x => x.Id == request.Id, cancellationToken);
         if (word is null)
+        {
             return UnitResult.Failure(error: Errors.General.NotFound(request.Id));
+        }
 
         databaseContext.Words.Remove(word);
         await databaseContext.SaveChangesAsync(cancellationToken);

@@ -65,12 +65,13 @@ application.MapApplicationEndpoints();
 application
     .UseOpenTelemetryPrometheusScrapingEndpoint(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore package
 
+// Use Dependabot for updating dependencies https://github.com/serilog-contrib/serilog-sinks-grafana-loki/commits?author=dependabot%5Bbot%5D
+// TODO Replace Makefile with bash.sh
 application.Run();
 
-// TODO Replace Makefile with bash.sh
-
-// Use Dependabot for updating dependencies https://github.com/serilog-contrib/serilog-sinks-grafana-loki/commits?author=dependabot%5Bbot%5D
-
+/// <summary>
+/// Public modifier is needed for WebApplicationFactory{T} instance creation in integration tests.
+/// </summary>
 public partial class Program
 {
-} // Public modifier is needed for WebApplicationFactory<Program> instance creation in integration tests
+}

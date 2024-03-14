@@ -13,8 +13,7 @@ public sealed class ErrorTests
             .Select(x => x
                 .GetMethods(BindingFlags.Static | BindingFlags.Public)
                 .Where(y => y.ReturnType == typeof(Error))
-                .ToList()
-            )
+                .ToList())
             .SelectMany(x => x)
             .ToList();
 
@@ -31,10 +30,14 @@ public sealed class ErrorTests
             .Select<ParameterInfo, object>(x =>
             {
                 if (x.ParameterType == typeof(string))
+                {
                     return string.Empty;
+                }
 
                 if (x.ParameterType == typeof(Guid?))
+                {
                     return Guid.Empty;
+                }
 
                 throw new Exception();
             })

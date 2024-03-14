@@ -16,13 +16,14 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
         var queryable = readOnlyDatabaseContext.Words;
 
         // TODO Return just Maybe, not Result<Maybe> ?
-
         var word = await queryable
             .Where(x => x.Id == request.Id)
             .SingleOrDefaultAsync(cancellationToken);
 
         if (word is null)
+        {
             return Maybe<GetWordDto>.None;
+        }
 
         var result = new GetWordDto(
             word.Id,

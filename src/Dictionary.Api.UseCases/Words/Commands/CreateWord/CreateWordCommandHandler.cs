@@ -23,7 +23,6 @@ internal class CreateWordCommandHandler(IDatabaseContext databaseContext)
 
         // TODO Use try/catch to check if uniqueness constraint is not respected. Write integration test that breaks
         // constraint and the appropriate error message is returned
-
         try
         {
             await databaseContext.SaveChangesAsync(cancellationToken);

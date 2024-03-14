@@ -22,6 +22,5 @@ public static class MetricsConfiguration
                 x.AddPrometheusExporter(); // Requires OpenTelemetry.Exporter.Prometheus.AspNetCore
                 x.AddMeter(defaultMeterName);
             });
-
     }
 }
