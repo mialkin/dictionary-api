@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Dictionary.Api.IntegrationTests.Words.Infrastructure;
+namespace Dictionary.Api.IntegrationTests.Words;
 
-public class WordsControllerWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
+public class WordEndpointsWebApplicationFactory<TEntryPoint> : WebApplicationFactory<TEntryPoint>
     where TEntryPoint : class
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
@@ -16,7 +16,7 @@ public class WordsControllerWebApplicationFactory<TEntryPoint> : WebApplicationF
 
         builder.ConfigureTestServices(services =>
         {
-            services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
+            ServiceCollectionServiceExtensions.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>(services);
         });
     }
 }

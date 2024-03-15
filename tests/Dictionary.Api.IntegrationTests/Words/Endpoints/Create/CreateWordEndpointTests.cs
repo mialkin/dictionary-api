@@ -1,26 +1,29 @@
 using System.Net;
 using System.Net.Http.Json;
+using AutoFixture.Xunit2;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
-using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Dictionary.Api.IntegrationTests.Words;
+namespace Dictionary.Api.IntegrationTests.Words.Endpoints.Create;
 
-public class CreateWordEndpointTests(WordsControllerWebApplicationFactory<Program> factory)
-    : IClassFixture<WordsControllerWebApplicationFactory<Program>>
+public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program> factory)
+    : IClassFixture<WordEndpointsWebApplicationFactory<Program>>
 {
     [Theory]
-    [MemberData(nameof(CreateWordTestData.ValidRequests), MemberType = typeof(CreateWordTestData))]
-    public async Task Stores_word_in_database_correctly(CreateWordRequest request)
+    [InlineAutoData("ɪg'zɑːmpl træn'skrɪpʃ(ə)n")]
+    [InlineAutoData(null)]
+    public async Task Saves_word_to_database_correctly(string transcription, string name, string translation)
     {
         // Arrange
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+
         var client = factory.CreateClient();
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
-        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var httpResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
         var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
 
         // Act
@@ -35,20 +38,16 @@ public class CreateWordEndpointTests(WordsControllerWebApplicationFactory<Progra
         request.Translation.Should().Be(word.Translation);
     }
 
-    [Fact]
-    public async Task Does_not_allow_two_of_the_same_words_in_dictionary()
+    [Theory]
+    [AutoData]
+    public async Task Does_not_allow_two_of_the_same_words_in_one_dictionary(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
-        var request = new CreateWordRequest(
-            LanguageId: 1,
-            Name: Guid.NewGuid().ToString(),
-            Transcription: null,
-            Translation: Guid.NewGuid().ToString());
 
         // Act
-        var firstResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
-        var secondResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var firstResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
+        var secondResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
 
         // Assert
         firstResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);

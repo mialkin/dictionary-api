@@ -1,7 +1,7 @@
 using Dictionary.Api.Endpoints.Words.Create;
 using Xunit;
 
-namespace Dictionary.Api.IntegrationTests.Words;
+namespace Dictionary.Api.IntegrationTests.Words.Endpoints.Create;
 
 public static class CreateWordTestData
 {

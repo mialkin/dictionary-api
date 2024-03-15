@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Http;
 
-namespace Dictionary.Api.IntegrationTests.Words.Infrastructure;
+namespace Dictionary.Api.IntegrationTests.Words;
 
 public sealed class FakePolicyEvaluator : IPolicyEvaluator
 {
