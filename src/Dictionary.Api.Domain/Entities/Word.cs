@@ -34,23 +34,6 @@ public class Word
 
     public DateTime UpdatedAt { get; private set; }
 
-    public static UnitResult<Error> CanUpdate(string? transcription, string translation)
-    {
-        if (!string.IsNullOrWhiteSpace(transcription)
-            && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
-        {
-            return Errors.Word.TranscriptionIsInvalid();
-        }
-
-        // TODO Make translation a value object and move length check inside of it?
-        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
-        {
-            return Errors.Word.TranslationIsInvalid();
-        }
-
-        return UnitResult.Success<Error>();
-    }
-
     public static Word Create(int languageId, string name, string? transcription, string translation)
     {
         var unitResult = CanCreate(name, transcription, translation);
@@ -75,6 +58,23 @@ public class Word
             return Errors.Word.TranscriptionIsInvalid();
         }
 
+        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
+        {
+            return Errors.Word.TranslationIsInvalid();
+        }
+
+        return UnitResult.Success<Error>();
+    }
+
+    public static UnitResult<Error> CanUpdate(string? transcription, string translation)
+    {
+        if (!string.IsNullOrWhiteSpace(transcription)
+            && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
+        {
+            return Errors.Word.TranscriptionIsInvalid();
+        }
+
+        // TODO Make translation a value object and move length check inside of it?
         if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
         {
             return Errors.Word.TranslationIsInvalid();
