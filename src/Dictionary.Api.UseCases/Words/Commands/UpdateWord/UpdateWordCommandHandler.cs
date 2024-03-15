@@ -12,7 +12,6 @@ internal class UpdateWordCommandHandler(IDatabaseContext databaseContext)
     public async Task<UnitResult<Error>> Handle(UpdateWordCommand request, CancellationToken cancellationToken)
     {
         var word = await databaseContext.Words.FindAsync(request.Id, cancellationToken);
-
         if (word is null)
         {
             return UnitResult.Failure(Errors.General.NotFound());

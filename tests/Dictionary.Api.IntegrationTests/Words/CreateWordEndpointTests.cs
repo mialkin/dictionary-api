@@ -4,27 +4,22 @@ using AutoFixture.Xunit2;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
 using FluentAssertions;
-using Flurl;
 using Xunit;
 
 namespace Dictionary.Api.IntegrationTests.Words;
 
-public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> factory)
+public class CreateWordEndpointTests(WordsControllerWebApplicationFactory<Program> factory)
     : IClassFixture<WordsControllerWebApplicationFactory<Program>>
 {
-    private const string BasePath = "api/words";
-    private const string CreateSegment = "create";
-
     [Theory]
     [AutoData]
-    public async Task Create_WhenRequestIsValid_CreatesNewWord(CreateWordRequest request)
+    public async Task Creates_word_correctly(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
-        var createResponse = await client.PostAsJsonAsync(createUri, request);
+        var createResponse = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
 
         // Assert
         createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -36,10 +31,9 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
-        var createResponse = await client.PostAsJsonAsync(createUri, request);
+        var createResponse = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
 
         // Assert
         createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
@@ -51,10 +45,9 @@ public class WordsEndpointsTests(WordsControllerWebApplicationFactory<Program> f
     {
         // Arrange
         var client = factory.CreateClient();
-        var createUri = BasePath.AppendPathSegment(CreateSegment);
 
         // Act
-        var createResponse = await client.PostAsJsonAsync(createUri, request);
+        var createResponse = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
 
         // Assert
         createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
