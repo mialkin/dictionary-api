@@ -9,6 +9,6 @@ public class WordEntityTypeConfiguration : IEntityTypeConfiguration<Word>
     public void Configure(EntityTypeBuilder<Word> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.HasIndex(x => new { x.LanguageId, x.Name }); // TODO Add UserId uniqueness
+        builder.HasIndex(x => new { x.LanguageId, x.Name }).IsUnique(); // TODO Add UserId uniqueness
     }
 }

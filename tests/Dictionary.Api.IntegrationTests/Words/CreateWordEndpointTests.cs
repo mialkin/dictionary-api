@@ -1,6 +1,5 @@
 using System.Net;
 using System.Net.Http.Json;
-using AutoFixture.Xunit2;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using Dictionary.Api.IntegrationTests.Words.Infrastructure;
@@ -15,16 +14,16 @@ public class CreateWordEndpointTests(WordsControllerWebApplicationFactory<Progra
     : IClassFixture<WordsControllerWebApplicationFactory<Program>>
 {
     [Theory]
-    [AutoData]
-    public async Task Creates_word_correctly(CreateWordRequest request)
+    [MemberData(nameof(CreateWordTestData.ValidRequests), MemberType = typeof(CreateWordTestData))]
+    public async Task Stores_word_in_database_correctly(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
-
-        // Act
         var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
         var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
+
+        // Act
         var word = await databaseContext.Words.SingleAsync(x => x.Id == createWordResponse!.Id);
 
         // Assert
@@ -36,31 +35,23 @@ public class CreateWordEndpointTests(WordsControllerWebApplicationFactory<Progra
         request.Translation.Should().Be(word.Translation);
     }
 
-    [Theory]
-    [AutoData]
-    public async Task Create_WhenTranslationIsNullOrWhitespace_ReturnsError(CreateWordRequest request)
+    [Fact]
+    public async Task Does_not_allow_two_of_the_same_words_in_dictionary()
     {
         // Arrange
         var client = factory.CreateClient();
+        var request = new CreateWordRequest(
+            LanguageId: 1,
+            Name: Guid.NewGuid().ToString(),
+            Transcription: null,
+            Translation: Guid.NewGuid().ToString());
 
         // Act
-        var createResponse = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var firstResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var secondResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
 
         // Assert
-        createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
-    }
-
-    [Theory]
-    [AutoData]
-    public async Task Create_WhenTranscriptionIsNullOrWhitespace_SavesTranscriptionAsNull(CreateWordRequest request)
-    {
-        // Arrange
-        var client = factory.CreateClient();
-
-        // Act
-        var createResponse = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
-
-        // Assert
-        createResponse.StatusCode.Should().Be(HttpStatusCode.OK);
+        firstResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+        secondResponseMessage.StatusCode.Should().Be(HttpStatusCode.BadRequest);
     }
 }
