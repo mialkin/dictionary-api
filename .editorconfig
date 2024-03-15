@@ -100,6 +100,10 @@ dotnet_diagnostic.SA1200.severity = none
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1201.md
 dotnet_diagnostic.SA1201.severity = none
 
+# A field name in C# begins with an underscore
+# https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1309.md
+dotnet_diagnostic.SA1309.severity = none
+
 # The last statement in a multi-line C# initializer or list is missing a trailing comma
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1413.md
 dotnet_diagnostic.SA1413.severity = none
