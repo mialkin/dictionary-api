@@ -7,9 +7,11 @@ using MediatR;
 namespace Dictionary.Api.UseCases.Words.Commands.CreateWord;
 
 internal class CreateWordCommandHandler(IDatabaseContext databaseContext)
-    : IRequestHandler<CreateWordCommand, UnitResult<Error>>
+    : IRequestHandler<CreateWordCommand, Result<CreateWordDto, Error>>
 {
-    public async Task<UnitResult<Error>> Handle(CreateWordCommand request, CancellationToken cancellationToken)
+    public async Task<Result<CreateWordDto, Error>> Handle(
+        CreateWordCommand request,
+        CancellationToken cancellationToken)
     {
         var unitResult = Word.CanCreate(request.Name, request.Transcription, request.Translation);
         if (unitResult.IsFailure)
@@ -31,9 +33,9 @@ internal class CreateWordCommandHandler(IDatabaseContext databaseContext)
         {
             var type = exception.GetType();
 
-            return UnitResult.Failure(Errors.General.AlreadyExists());
+            return Errors.Word.SomethingWentWrong();
         }
 
-        return UnitResult.Success<Error>();
+        return new CreateWordDto(word.Id);
     }
 }

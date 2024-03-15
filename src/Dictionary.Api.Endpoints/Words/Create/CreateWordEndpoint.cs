@@ -22,7 +22,7 @@ public static class CreateWordEndpoint
                 var result = await sender.Send(command, cancellationToken);
 
                 return result.IsSuccess
-                    ? Results.Ok()
+                    ? Results.Ok(result.Value.Adapt<CreateWordResponse>())
                     : Results.BadRequest(result.Error);
             })
             .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Create word" });

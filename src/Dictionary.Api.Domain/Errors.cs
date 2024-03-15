@@ -21,6 +21,9 @@ public static class Errors
                 code: "word.translation.is.invalid",
                 message: $"Translation must be non empty string less than or " +
                          $"equal to {Constants.Words.TranslationMaxLength} characters");
+
+        public static Error SomethingWentWrong() =>
+            new(code: "something.went.wrong", message: $"Something went wrong");
     }
 
     public static class General
