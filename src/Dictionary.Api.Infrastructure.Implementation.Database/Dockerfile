@@ -1,6 +1,7 @@
-﻿FROM mialkin/dotnet8-sdk-with-tools:1.0.0 AS build-environment
+﻿FROM mialkin/dotnet-sdk-with-tools:8.0.203 AS build-environment
 
-COPY src ./src
+WORKDIR /application
+COPY . ./
 
 ENV ASPNETCORE_ENVIRONMENT=GitLab
 
@@ -11,8 +12,9 @@ RUN dotnet ef migrations bundle \
     --runtime linux-x64 \
     --output /migration_bundle
 
-FROM mcr.microsoft.com/dotnet/runtime-deps:8.0
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0.3
 
+WORKDIR /application
 COPY --from=build-environment /migration_bundle ./
 
 ENTRYPOINT ["./migration_bundle"]

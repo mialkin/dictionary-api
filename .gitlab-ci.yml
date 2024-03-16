@@ -1,5 +1,5 @@
 variables:
-  DOTNET_SDK_IMAGE: mialkin/dotnet8-sdk-with-tools:1.0.0
+  DOTNET_SDK_IMAGE: mialkin/dotnet-sdk-with-tools:8.0.203
   NUGET_PACKAGES_DIRECTORY: .nuget
   MIGRATIONS_DOCKER_IMAGE_NAME: mialkin/dictionary-api-migrations
   DOCKER_IMAGE_NAME: mialkin/dictionary-api
