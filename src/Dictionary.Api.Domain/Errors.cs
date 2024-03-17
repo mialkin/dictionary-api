@@ -7,8 +7,11 @@ public static class Errors
         public static Error NameIsInvalid() =>
             new(
                 code: "word.name.is.invalid",
-                message: $"Name must be non empty string less than or " +
+                message: $"Word must be non empty string less than or " +
                          $"equal to {Constants.Words.NameMaxLength} characters");
+
+        public static Error NameAlreadyExists(string name) =>
+            new(code: "word.name.already.exists", message: $"Word \"{name}\" already exists in the dictionary");
 
         public static Error TranscriptionIsInvalid() =>
             new(
@@ -21,22 +24,14 @@ public static class Errors
                 code: "word.translation.is.invalid",
                 message: $"Translation must be non empty string less than or " +
                          $"equal to {Constants.Words.TranslationMaxLength} characters");
-
-        public static Error SomethingWentWrong() =>
-            new(code: "something.went.wrong", message: $"Something went wrong");
     }
 
     public static class General
     {
         public static Error NotFound(Guid? id = null)
         {
-            var forId = id is null ? string.Empty : $" for ID '{id}'";
+            var forId = id is null ? string.Empty : $" for ID \"{id}\"";
             return new Error(code: "record.not.found", message: $"Record not found{forId}");
-        }
-
-        public static Error AlreadyExists()
-        {
-            return new Error(code: "record.already.exists", message: $"Record already exists");
         }
 
         public static Error InternalServerError(string message)

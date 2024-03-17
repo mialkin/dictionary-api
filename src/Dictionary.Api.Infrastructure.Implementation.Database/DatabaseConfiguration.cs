@@ -1,5 +1,6 @@
 using Ardalis.GuardClauses;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
+using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,6 +19,7 @@ public static class DatabaseConfiguration
         {
             builder
                 .UseNpgsql(connectionString)
+                .UseExceptionProcessor()
                 .UseSnakeCaseNamingConvention();
         });
 
