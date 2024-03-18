@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
+using Dictionary.Api.Domain;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using FluentAssertions;
@@ -48,9 +49,11 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
         // Act
         var firstResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
         var secondResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
+        var error = await secondResponseMessage.Content.ReadFromJsonAsync<Error>();
 
         // Assert
         firstResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
         secondResponseMessage.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        error.Should().Be(Errors.Word.NameAlreadyExists(request.Name));
     }
 }

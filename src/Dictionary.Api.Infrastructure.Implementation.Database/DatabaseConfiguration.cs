@@ -1,4 +1,3 @@
-using Ardalis.GuardClauses;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using EntityFramework.Exceptions.PostgreSQL;
 using Microsoft.EntityFrameworkCore;
@@ -12,13 +11,15 @@ public static class DatabaseConfiguration
         this IServiceCollection services,
         PostgresSettings? postgresSettings)
     {
-        Guard.Against.Null(postgresSettings);
-        var connectionString = Guard.Against.NullOrWhiteSpace(postgresSettings.ConnectionString);
+        if (string.IsNullOrWhiteSpace(postgresSettings?.ConnectionString))
+        {
+            throw new InvalidOperationException("PostgreSQL connection string is not set");
+        }
 
         services.AddDbContext<IDatabaseContext, DatabaseContext>(builder =>
         {
             builder
-                .UseNpgsql(connectionString)
+                .UseNpgsql(postgresSettings.ConnectionString)
                 .UseExceptionProcessor()
                 .UseSnakeCaseNamingConvention();
         });
