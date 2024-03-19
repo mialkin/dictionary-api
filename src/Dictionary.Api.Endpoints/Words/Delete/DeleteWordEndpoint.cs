@@ -19,11 +19,9 @@ public static class DeleteWordEndpoint
                 CancellationToken cancellationToken) =>
             {
                 var command = request.Adapt<DeleteWordCommand>();
-                var result = await sender.Send(command, cancellationToken);
+                await sender.Send(command, cancellationToken);
 
-                return result.IsSuccess
-                    ? Results.Ok()
-                    : Results.BadRequest(result.Error);
+                return Results.Ok();
             })
             .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Delete word by ID" });
     }
