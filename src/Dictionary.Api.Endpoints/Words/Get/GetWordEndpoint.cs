@@ -19,14 +19,14 @@ public static class GetWordEndpoint
                 CancellationToken cancellationToken) =>
             {
                 var query = request.Adapt<GetWordQuery>();
-                var result = await sender.Send(query, cancellationToken);
+                var maybe = await sender.Send(query, cancellationToken);
 
-                return result.Value.HasValue
-                    ? Results.Ok(result.Value.Value)
-                    : Results.NotFound(Errors.General.NotFound());
+                return maybe.HasValue
+                    ? Results.Ok(maybe.Value)
+                    : Results.BadRequest(Errors.General.NotFound(request.Id));
             })
             .Produces<GetWordDto>()
-            .Produces<Error>(StatusCodes.Status404NotFound)
+            .Produces<Error>(StatusCodes.Status400BadRequest)
             .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Get word by ID" });
     }
 }

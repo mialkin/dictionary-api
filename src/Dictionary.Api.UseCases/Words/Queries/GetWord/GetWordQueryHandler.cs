@@ -1,5 +1,4 @@
 using CSharpFunctionalExtensions;
-using Dictionary.Api.Domain;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -7,15 +6,14 @@ using Microsoft.EntityFrameworkCore;
 namespace Dictionary.Api.UseCases.Words.Queries.GetWord;
 
 internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseContext)
-    : IRequestHandler<GetWordQuery, Result<Maybe<GetWordDto>, Error>>
+    : IRequestHandler<GetWordQuery, Maybe<GetWordDto>>
 {
-    public async Task<Result<Maybe<GetWordDto>, Error>> Handle(
+    public async Task<Maybe<GetWordDto>> Handle(
         GetWordQuery request,
         CancellationToken cancellationToken)
     {
         var queryable = readOnlyDatabaseContext.Words;
 
-        // TODO Return just Maybe, not Result<Maybe> ?
         var word = await queryable
             .Where(x => x.Id == request.Id)
             .SingleOrDefaultAsync(cancellationToken);

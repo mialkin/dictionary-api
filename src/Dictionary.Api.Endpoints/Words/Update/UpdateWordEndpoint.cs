@@ -1,3 +1,4 @@
+using Dictionary.Api.Domain;
 using Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 using Mapster;
 using MediatR;
@@ -22,11 +23,12 @@ public static class UpdateWordEndpoint
                 var command = request.Adapt<UpdateWordCommand>();
                 var result = await sender.Send(command, cancellationToken);
 
-                // TODO Implement something like Result.FromUnitResult(result);
                 return result.IsSuccess
                     ? Results.Ok()
                     : Results.BadRequest(result.Error);
             })
+            .Produces(StatusCodes.Status200OK)
+            .Produces<Error>(StatusCodes.Status400BadRequest)
             .WithOpenApi(operation => new OpenApiOperation(operation) { Summary = "Update word" });
     }
 }
