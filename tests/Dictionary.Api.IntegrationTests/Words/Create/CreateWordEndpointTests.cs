@@ -17,14 +17,14 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     [Theory]
     [InlineAutoData("ɪg'zɑːmpl træn'skrɪpʃ(ə)n")]
     [InlineAutoData(null)]
-    public async Task Saves_word_to_database_correctly(string transcription, string name, string translation)
+    public async Task Save_word_to_database_correctly(string transcription, string name, string translation)
     {
         // Arrange
         var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
 
         var client = factory.CreateClient();
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
-        var httpResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
+        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
         var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
 
         // Act
@@ -41,14 +41,14 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
 
     [Theory]
     [AutoData]
-    public async Task Does_not_allow_two_of_the_same_words_in_one_dictionary(CreateWordRequest request)
+    public async Task Do_not_allow_to_save_two_of_the_same_words_in_one_dictionary(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
 
         // Act
-        var firstResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
-        var secondResponseMessage = await client.PostAsJsonAsync(IntegrationTests.Endpoints.CreateWord, request);
+        var firstResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var secondResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
         var error = await secondResponseMessage.Content.ReadFromJsonAsync<Error>();
 
         // Assert
