@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
-namespace Dictionary.Api.IntegrationTests.Words.Endpoints.Create;
+namespace Dictionary.Api.IntegrationTests.Words.Create;
 
 public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program> factory)
     : IClassFixture<WordEndpointsWebApplicationFactory<Program>>
