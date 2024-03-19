@@ -11,9 +11,9 @@ namespace Dictionary.Api.Endpoints.Words.Delete;
 
 public static class DeleteWordEndpoint
 {
-    public static void MapDeleteWord(this IEndpointRouteBuilder builder)
+    public static void MapDeleteWord(this IEndpointRouteBuilder builder, string routePattern)
     {
-        builder.MapDelete("delete", async (
+        builder.MapDelete(routePattern, async (
                 [FromBody] DeleteWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>

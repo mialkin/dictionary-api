@@ -11,10 +11,10 @@ namespace Dictionary.Api.Endpoints.Words.Update;
 
 public static class UpdateWordEndpoint
 {
-    public static void MapUpdateWord(this IEndpointRouteBuilder builder)
+    public static void MapUpdateWord(this IEndpointRouteBuilder builder, string routePattern)
     {
         // TODO Move endpoint names to WordEndpoints class
-        builder.MapPatch("update", async (
+        builder.MapPatch(routePattern, async (
                 [FromBody] UpdateWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>

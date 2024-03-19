@@ -10,10 +10,10 @@ namespace Dictionary.Api.Endpoints.Words.Search;
 
 public static class SearchWordsEndpoint
 {
-    public static void MapSearchWords(this IEndpointRouteBuilder builder)
+    public static void MapSearchWords(this IEndpointRouteBuilder builder, string routePattern)
     {
         builder
-            .MapGet("search", async (
+            .MapGet(routePattern, async (
                 [AsParameters] SearchWordsRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>

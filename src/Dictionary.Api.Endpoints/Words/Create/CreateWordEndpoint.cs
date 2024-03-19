@@ -11,9 +11,9 @@ namespace Dictionary.Api.Endpoints.Words.Create;
 
 public static class CreateWordEndpoint
 {
-    public static void MapCreateWord(this IEndpointRouteBuilder builder)
+    public static void MapCreateWord(this IEndpointRouteBuilder builder, string routePattern)
     {
-        builder.MapPost("create", async (
+        builder.MapPost(routePattern, async (
                 [FromBody] CreateWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>

@@ -11,9 +11,9 @@ namespace Dictionary.Api.Endpoints.Words.Get;
 
 public static class GetWordEndpoint
 {
-    public static void MapGetWord(this IEndpointRouteBuilder builder)
+    public static void MapGetWord(this IEndpointRouteBuilder builder, string routePattern)
     {
-        builder.MapGet("get", async (
+        builder.MapGet(routePattern, async (
                 [AsParameters] GetWordRequest request,
                 ISender sender,
                 CancellationToken cancellationToken) =>

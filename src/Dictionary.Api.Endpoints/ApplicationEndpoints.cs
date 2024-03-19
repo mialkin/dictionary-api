@@ -22,10 +22,10 @@ public static class ApplicationEndpoints
             .WithTags("Words")
             .RequireAuthorization();
 
-        wordsGroupBuilder.MapSearchWords();
-        wordsGroupBuilder.MapGetWord();
-        wordsGroupBuilder.MapCreateWord();
-        wordsGroupBuilder.MapUpdateWord();
-        wordsGroupBuilder.MapDeleteWord();
+        wordsGroupBuilder.MapSearchWords("search");
+        wordsGroupBuilder.MapGetWord("get");
+        wordsGroupBuilder.MapCreateWord("create");
+        wordsGroupBuilder.MapUpdateWord("update");
+        wordsGroupBuilder.MapDeleteWord("delete");
     }
 }
