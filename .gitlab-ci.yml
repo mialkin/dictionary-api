@@ -5,7 +5,6 @@ variables:
   DOCKER_IMAGE_NAME: mialkin/dictionary-api
 
 stages:
-  - check-format
   - build
   - test
   - publish-migrations
@@ -14,25 +13,13 @@ stages:
 .restore_packages: &restore_nuget_packages
   - dotnet restore --packages $NUGET_PACKAGES_DIRECTORY
 
-check-format:
-  stage: check-format
-  interruptible: true
-  image: $DOTNET_SDK_IMAGE
-  script:
-    - *restore_nuget_packages
-    - dotnet format --version
-    - dotnet format --verify-no-changes --no-restore
-  cache:
-    key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
-    paths:
-      - $NUGET_PACKAGES_DIRECTORY
-
 build:
   stage: build
   interruptible: true
   image: $DOTNET_SDK_IMAGE
   script:
     - *restore_nuget_packages
+    - dotnet format --no-restore --verify-no-changes
     - dotnet build --no-restore --configuration Release
   cache:
     key: $CI_JOB_STAGE-$CI_COMMIT_REF_SLUG
