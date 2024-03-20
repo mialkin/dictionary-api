@@ -1,7 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
-using Dictionary.Api.Domain;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using FluentAssertions;
@@ -41,7 +40,7 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
 
     [Theory]
     [AutoData]
-    public async Task Do_not_allow_to_save_two_of_the_same_words_in_one_dictionary(CreateWordRequest request)
+    public async Task Do_not_allow_to_save_two_of_the_same_words_in_the_same_dictionary(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();
@@ -49,11 +48,11 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
         // Act
         var firstResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
         var secondResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
-        var error = await secondResponseMessage.Content.ReadFromJsonAsync<Error>();
+        var error = await secondResponseMessage.Content.ReadFromJsonAsync<ApiError>();
 
         // Assert
         firstResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
         secondResponseMessage.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-        error.Should().Be(Errors.Word.NameAlreadyExists(request.Name));
+        error!.Code.Should().Be("word.name.already.exists");
     }
 }
