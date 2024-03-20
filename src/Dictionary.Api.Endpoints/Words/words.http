@@ -1,8 +1,11 @@
 @baseUrl=http://localhost:2300/api
+@authCookieName = Dictionary.Session
+@authCookieValue = <authCookieValue>
 
 ### Create new word
 
 POST {{baseUrl}}/words/create
+Cookie: {{authCookieName}}={{authCookieValue}}
 Content-Type: application/json
 
 {
@@ -15,3 +18,4 @@ Content-Type: application/json
 
 ### Search words
 GET {{baseUrl}}/words/search?languageId=1
+Cookie: {{authCookieName}}={{authCookieValue}}
