@@ -14,7 +14,7 @@ internal class CreateWordCommandHandler(IDatabaseContext databaseContext)
         CreateWordCommand request,
         CancellationToken cancellationToken)
     {
-        var unitResult = Word.CanCreate(request.Name, request.Transcription, request.Translation);
+        var unitResult = Word.CanCreate(request.LanguageId, request.Name, request.Transcription, request.Translation);
         if (unitResult.IsFailure)
         {
             return unitResult.Error;

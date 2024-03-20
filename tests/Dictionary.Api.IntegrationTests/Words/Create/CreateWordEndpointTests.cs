@@ -14,9 +14,8 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     : IClassFixture<WordEndpointsWebApplicationFactory<Program>>
 {
     [Theory]
-    [InlineAutoData("ɪg'zɑːmpl")]
-    [InlineAutoData(null)]
-    public async Task Save_correct_word(string transcription, string name, string translation)
+    [AutoData]
+    public async Task Save_well_formed_word(string transcription, string name, string translation)
     {
         // Arrange
         var client = factory.CreateClient();
@@ -31,17 +30,17 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
         // Assert
         httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        request.LanguageId.Should().Be(word.LanguageId);
-        request.Name.Should().Be(word.Name);
-        request.Transcription.Should().Be(word.Transcription);
-        request.Translation.Should().Be(word.Translation);
+        word.LanguageId.Should().Be(request.LanguageId);
+        word.Name.Should().Be(request.Name);
+        word.Transcription.Should().Be(request.Transcription);
+        word.Translation.Should().Be(request.Translation);
     }
 
     [Theory]
     [InlineAutoData(null)]
     [InlineAutoData("")]
     [InlineAutoData(" ")]
-    public async Task Do_not_save_word_with_incorrect_name(string name, string transcription, string translation)
+    public async Task Forbid_to_save_word_with_empty_name(string name, string transcription, string translation)
     {
         // Arrange
         var client = factory.CreateClient();
@@ -57,8 +56,58 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     }
 
     [Theory]
+    [InlineAutoData(null)]
+    [InlineAutoData("")]
+    [InlineAutoData(" ")]
+    public async Task Save_empty_transcription_as_null(
+        string transcription,
+        string name,
+        string translation)
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+        var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
+
+        // Act
+        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
+        var word = await databaseContext.Words.SingleAsync(x => x.Id == createWordResponse!.Id);
+
+        // Assert
+        httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        word.LanguageId.Should().Be(request.LanguageId);
+        word.Name.Should().Be(request.Name);
+        word.Transcription.Should().Be(null);
+        word.Translation.Should().Be(request.Translation);
+    }
+
+    [Theory]
+    [InlineAutoData(null)]
+    [InlineAutoData("")]
+    [InlineAutoData(" ")]
+    public async Task Forbid_to_save_word_with_empty_translation(
+        string translation,
+        string name,
+        string transcription)
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+
+        // Act
+        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<ApiError>();
+
+        // Assert
+        httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        createWordResponse!.Code.Should().Be("word.translation.is.invalid");
+    }
+
+    [Theory]
     [AutoData]
-    public async Task Do_not_allow_to_save_two_of_the_same_words_in_the_same_dictionary(CreateWordRequest request)
+    public async Task Forbid_to_save_word_twice(CreateWordRequest request)
     {
         // Arrange
         var client = factory.CreateClient();

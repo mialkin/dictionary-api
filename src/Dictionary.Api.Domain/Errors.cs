@@ -4,6 +4,11 @@ public static class Errors
 {
     public static class Word
     {
+        public static Error LanguageIdIsInvalid(int? languageId) =>
+            new(
+                code: "word.language.id.is.invalid",
+                message: $"Specified language ID \"{languageId}\" is invalid");
+
         public static Error NameIsInvalid() =>
             new(
                 code: "word.name.is.invalid",

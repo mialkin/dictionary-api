@@ -37,5 +37,5 @@ internal class DatabaseContext : DbContext, IDatabaseContext
         string name,
         string? transcription,
         string translation) =>
-        new(languageId, genderId, name, translation, transcription);
+        new(languageId, genderId, name, transcription, translation);
 }

@@ -4,14 +4,14 @@ namespace Dictionary.Api.Domain.Entities;
 
 public class Word
 {
-    public Word(int languageId, int genderId, string name, string? translation, string? transcription)
+    public Word(int languageId, int genderId, string name, string? transcription, string? translation)
     {
         Id = Guid.NewGuid();
         LanguageId = languageId;
         GenderId = genderId;
         Name = name;
-        Translation = translation;
         Transcription = transcription;
+        Translation = translation;
 
         var utcNow = DateTime.UtcNow; // TODO Use ISystemClock
         CreatedAt = utcNow;
@@ -26,9 +26,9 @@ public class Word
 
     public string Name { get; private set; }
 
-    public string? Translation { get; private set; }
-
     public string? Transcription { get; private set; }
+
+    public string? Translation { get; private set; }
 
     public DateTime CreatedAt { get; private set; }
 
@@ -36,29 +36,39 @@ public class Word
 
     public static Word Create(int languageId, string name, string? transcription, string translation)
     {
-        var unitResult = CanCreate(name, transcription, translation);
+        var unitResult = CanCreate(languageId, name, transcription, translation);
         if (unitResult.IsFailure)
         {
             throw new InvalidOperationException();
         }
 
-        return new Word(languageId, genderId: 0, name, translation, transcription);
+        return new Word(
+            languageId,
+            genderId: 0,
+            name.Trim(),
+            string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
+            translation.Trim());
     }
 
-    public static UnitResult<Error> CanCreate(string name, string? transcription, string translation)
+    public static UnitResult<Error> CanCreate(int? languageId, string? name, string? transcription, string? translation)
     {
-        if (!NameIsValid(name))
+        if (languageId is null)
+        {
+            return Errors.Word.LanguageIdIsInvalid(languageId);
+        }
+
+        if (!IsNameValid(name))
         {
             return Errors.Word.NameIsInvalid();
         }
 
-        if (!string.IsNullOrWhiteSpace(transcription)
-            && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
+        // TODO Use value object for transcription. Encapsulate all the checks inside Transcription class
+        if (!IsTranscriptionValid(transcription))
         {
             return Errors.Word.TranscriptionIsInvalid();
         }
 
-        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
+        if (!IsTranslationValid(translation))
         {
             return Errors.Word.TranslationIsInvalid();
         }
@@ -66,16 +76,14 @@ public class Word
         return UnitResult.Success<Error>();
     }
 
-    public static UnitResult<Error> CanUpdate(string? transcription, string translation)
+    public static UnitResult<Error> CanUpdate(string? transcription, string? translation)
     {
-        if (!string.IsNullOrWhiteSpace(transcription)
-            && (transcription.Trim().Length == 0 || transcription.Length > Constants.Words.TranscriptionMaxLength))
+        if (!IsTranscriptionValid(transcription))
         {
             return Errors.Word.TranscriptionIsInvalid();
         }
 
-        // TODO Make translation a value object and move length check inside of it?
-        if (string.IsNullOrWhiteSpace(translation) || translation.Length > Constants.Words.TranslationMaxLength)
+        if (!IsTranslationValid(translation))
         {
             return Errors.Word.TranslationIsInvalid();
         }
@@ -91,8 +99,8 @@ public class Word
             throw new InvalidOperationException(); // Pass error returned by CanUpdate and word ID
         }
 
-        Transcription = transcription;
-        Translation = translation;
+        Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim();
+        Translation = translation.Trim();
         UpdatedAt = DateTime.UtcNow; // TODO Use ISystemClock
     }
 
@@ -105,8 +113,33 @@ public class Word
     {
     }
 
-    private static bool NameIsValid(string name)
+    private static bool IsNameValid(string? name)
     {
-        return !string.IsNullOrWhiteSpace(name) && name.Length <= Constants.Words.NameMaxLength;
+        if (string.IsNullOrWhiteSpace(name))
+        {
+            return false;
+        }
+
+        return name.Trim().Length <= Constants.Words.NameMaxLength;
+    }
+
+    private static bool IsTranscriptionValid(string? transcription)
+    {
+        if (string.IsNullOrWhiteSpace(transcription))
+        {
+            return true;
+        }
+
+        return transcription.Trim().Length <= Constants.Words.TranscriptionMaxLength;
+    }
+
+    private static bool IsTranslationValid(string? translation)
+    {
+        if (string.IsNullOrWhiteSpace(translation))
+        {
+            return false;
+        }
+
+        return translation.Trim().Length <= Constants.Words.TranslationMaxLength;
     }
 }
