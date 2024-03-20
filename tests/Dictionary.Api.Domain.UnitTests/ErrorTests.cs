@@ -39,7 +39,12 @@ public sealed class ErrorTests
                     return Guid.Empty;
                 }
 
-                throw new Exception();
+                if (x.ParameterType == typeof(int?))
+                {
+                    return 0;
+                }
+
+                throw new Exception($"Invalid parameter type inside of \"{nameof(GetErrorCode)}\" method");
             })
             .ToArray();
 
