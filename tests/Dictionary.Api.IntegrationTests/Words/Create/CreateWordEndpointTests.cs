@@ -14,19 +14,18 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     : IClassFixture<WordEndpointsWebApplicationFactory<Program>>
 {
     [Theory]
-    [InlineAutoData("ɪg'zɑːmpl træn'skrɪpʃ(ə)n")]
+    [InlineAutoData("ɪg'zɑːmpl")]
     [InlineAutoData(null)]
-    public async Task Save_word_to_database_correctly(string transcription, string name, string translation)
+    public async Task Save_correct_word(string transcription, string name, string translation)
     {
         // Arrange
-        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
-
         var client = factory.CreateClient();
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
-        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
-        var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
 
         // Act
+        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<CreateWordResponse>();
         var word = await databaseContext.Words.SingleAsync(x => x.Id == createWordResponse!.Id);
 
         // Assert
@@ -36,6 +35,25 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
         request.Name.Should().Be(word.Name);
         request.Transcription.Should().Be(word.Transcription);
         request.Translation.Should().Be(word.Translation);
+    }
+
+    [Theory]
+    [InlineAutoData(null)]
+    [InlineAutoData("")]
+    [InlineAutoData(" ")]
+    public async Task Do_not_save_word_with_incorrect_name(string name, string transcription, string translation)
+    {
+        // Arrange
+        var client = factory.CreateClient();
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+
+        // Act
+        var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
+        var createWordResponse = await httpResponseMessage.Content.ReadFromJsonAsync<ApiError>();
+
+        // Assert
+        httpResponseMessage.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+        createWordResponse!.Code.Should().Be("word.name.is.invalid");
     }
 
     [Theory]
