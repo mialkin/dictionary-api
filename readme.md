@@ -1,15 +1,24 @@
 # Dictionary API
 
-## Prerequisites
+## Running application
 
-- [↑ Docker](https://www.docker.com)
-- [↑ GNU Make](https://www.gnu.org/software/make)
-- [↑ .NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
-- [↑ EF Core command-line tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+### Global prerequisites
 
-## Run application
+Install [↑ Docker](https://www.docker.com).
 
-1\. Run application infrastructure:
+### Running application in Docker
+
+TODO
+
+### Running application in IDE
+
+1\. Install prerequisites:
+
+1. [↑ GNU Make](https://www.gnu.org/software/make)
+2. [↑ .NET SDK 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+3. [↑ EF Core command-line tools](https://learn.microsoft.com/en-us/ef/core/cli/dotnet)
+
+2\. Run application infrastructure:
 
 ```bash
 make run-infrastructure
@@ -18,7 +27,7 @@ make run-infrastructure
 # make shutdown-infrastructure
 ```
 
-2\. Set user secret:
+3\. Set user secret:
 
 ```bash
 dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_api;Password=dictionary_api;Host=localhost;Port=3300;Database=dictionary_api" --project "src/Dictionary.Api"
@@ -28,19 +37,19 @@ dotnet user-secrets set "PostgresSettings:ConnectionString" "User ID=dictionary_
 # dotnet user-secrets clear --project "src/Dictionary.Api"
 ```
 
-3\. Apply database migrations:
+4\. Apply database migrations:
 
 ```bash
 make update-database
 ```
 
-4\. Run application:
+5\. Run application:
 
 ```bash
 dotnet run --project "src/Dictionary.Api"
 ```
 
-5\. Navigate to <http://localhost:2300>.
+6\. Navigate to <http://localhost:2300>.
 
 [//]: # (// TODO Add command that sets everything up and runs app in Docker?)
 
