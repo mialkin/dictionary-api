@@ -32,8 +32,9 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
                 x.LanguageId,
                 x.GenderId,
                 x.Name,
-                x.Translation,
                 x.Transcription,
+                WordGender.Create(x),
+                x.Translation,
                 x.CreatedAt,
                 x.UpdatedAt))
             .Take(50) // TODO Move to specification and reuse across different methods?
