@@ -108,9 +108,14 @@ public class Word
         }
 
         Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim();
-        GenderMasculine = gender?.Masculine ?? false;
-        GenderFeminine = gender?.Feminine ?? false;
-        GenderNeuter = gender?.Neuter ?? false;
+
+        if (gender is not null)
+        {
+            GenderMasculine = gender.Masculine;
+            GenderFeminine = gender.Feminine;
+            GenderNeuter = gender.Neuter;
+        }
+
         Translation = translation.Trim();
         UpdatedAt = DateTime.UtcNow; // TODO Use ISystemClock
     }
