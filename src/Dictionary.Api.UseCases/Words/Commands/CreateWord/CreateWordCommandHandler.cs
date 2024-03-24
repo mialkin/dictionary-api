@@ -3,6 +3,7 @@ using Dictionary.Api.Domain;
 using Dictionary.Api.Domain.Entities;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using EntityFramework.Exceptions.Common;
+using Mapster;
 using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.CreateWord;
@@ -20,11 +21,15 @@ internal class CreateWordCommandHandler(IDatabaseContext databaseContext)
             return unitResult.Error;
         }
 
-        var word = Word.Create(request.LanguageId, request.Name, request.Transcription, request.Translation);
+        var word = Word.Create(
+            request.LanguageId,
+            request.Name,
+            request.Transcription,
+            request.Gender.Adapt<Domain.ValueObjects.WordGender>(),
+            request.Translation);
 
         databaseContext.Words.Add(word);
 
-        // Write integration test that breaks constraint and the appropriate error message is returned
         try
         {
             await databaseContext.SaveChangesAsync(cancellationToken);

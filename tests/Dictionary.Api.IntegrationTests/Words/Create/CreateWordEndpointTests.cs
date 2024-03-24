@@ -1,6 +1,7 @@
 using System.Net;
 using System.Net.Http.Json;
 using AutoFixture.Xunit2;
+using Dictionary.Api.Endpoints.Words;
 using Dictionary.Api.Endpoints.Words.Create;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
 using FluentAssertions;
@@ -15,11 +16,11 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
 {
     [Theory]
     [AutoData]
-    public async Task Save_well_formed_word(string transcription, string name, string translation)
+    public async Task Save_well_formed_word(string name, string? transcription, WordGender? gender, string translation)
     {
         // Arrange
         var client = factory.CreateClient();
-        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, gender, translation);
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
 
         // Act
@@ -40,11 +41,15 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     [InlineAutoData(null)]
     [InlineAutoData("")]
     [InlineAutoData(" ")]
-    public async Task Forbid_to_save_word_with_empty_name(string name, string transcription, string translation)
+    public async Task Forbid_to_save_word_with_empty_name(
+        string name,
+        string? transcription,
+        WordGender? gender,
+        string translation)
     {
         // Arrange
         var client = factory.CreateClient();
-        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, gender, translation);
 
         // Act
         var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);
@@ -62,11 +67,12 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     public async Task Save_empty_transcription_as_null(
         string transcription,
         string name,
+        WordGender? gender,
         string translation)
     {
         // Arrange
         var client = factory.CreateClient();
-        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, gender, translation);
         var databaseContext = factory.Services.GetRequiredService<IReadOnlyDatabaseContext>();
 
         // Act
@@ -90,11 +96,12 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     public async Task Forbid_to_save_word_with_empty_translation(
         string translation,
         string name,
-        string transcription)
+        string? transcription,
+        WordGender? gender)
     {
         // Arrange
         var client = factory.CreateClient();
-        var request = new CreateWordRequest(LanguageId: 1, name, transcription, translation);
+        var request = new CreateWordRequest(LanguageId: 1, name, transcription, gender, translation);
 
         // Act
         var httpResponseMessage = await client.PostAsJsonAsync(Endpoints.CreateWord, request);

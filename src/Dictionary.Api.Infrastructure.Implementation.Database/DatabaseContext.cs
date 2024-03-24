@@ -22,20 +22,4 @@ internal class DatabaseContext : DbContext, IDatabaseContext
 
         // SeedWords(modelBuilder); TODO Make it work https://learn.microsoft.com/en-us/ef/core/modeling/data-seeding
     }
-
-    private static void SeedWords(ModelBuilder modelBuilder) // TODO Remove it
-    {
-        modelBuilder.Entity<Word>().HasData(
-            CreateWord(1, 0, "apple", null, "яблоко"),
-            CreateWord(1, 0, "orange", null, "апельсин"),
-            CreateWord(1, 0, "banana", "bə'nɑːnə", "банан"));
-    }
-
-    private static Word CreateWord(
-        int languageId,
-        int genderId,
-        string name,
-        string? transcription,
-        string translation) =>
-        new(languageId, genderId, name, transcription, translation);
 }

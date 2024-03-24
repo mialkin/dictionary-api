@@ -1,16 +1,31 @@
 using CSharpFunctionalExtensions;
+using Dictionary.Api.Domain.ValueObjects;
 
 namespace Dictionary.Api.Domain.Entities;
 
 public class Word
 {
-    public Word(int languageId, int genderId, string name, string? transcription, string? translation)
+    public Word(
+        int languageId,
+        int genderId,
+        string name,
+        string? transcription,
+        WordGender? gender,
+        string? translation)
     {
         Id = Guid.NewGuid();
         LanguageId = languageId;
         GenderId = genderId;
         Name = name;
         Transcription = transcription;
+
+        if (gender is not null)
+        {
+            GenderMasculine = gender.Masculine;
+            GenderFeminine = gender.Feminine;
+            GenderNeuter = gender.Neuter;
+        }
+
         Translation = translation;
 
         var utcNow = DateTime.UtcNow; // TODO Use ISystemClock
@@ -30,11 +45,22 @@ public class Word
 
     public string? Translation { get; private set; }
 
+    public bool GenderMasculine { get; private set; }
+
+    public bool GenderFeminine { get; private set; }
+
+    public bool GenderNeuter { get; private set; }
+
     public DateTime CreatedAt { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
 
-    public static Word Create(int languageId, string name, string? transcription, string translation)
+    public static Word Create(
+        int languageId,
+        string name,
+        string? transcription,
+        WordGender? gender,
+        string translation)
     {
         var unitResult = CanCreate(languageId, name, transcription, translation);
         if (unitResult.IsFailure)
@@ -45,9 +71,10 @@ public class Word
         return new Word(
             languageId,
             genderId: 0,
-            name.Trim(),
-            string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
-            translation.Trim());
+            name: name.Trim(),
+            transcription: string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
+            gender,
+            translation: translation.Trim());
     }
 
     public static UnitResult<Error> CanCreate(int? languageId, string? name, string? transcription, string? translation)
