@@ -5,34 +5,6 @@ namespace Dictionary.Api.Domain.Entities;
 
 public class Word
 {
-    public Word(
-        int languageId,
-        int genderId,
-        string name,
-        string? transcription,
-        WordGender? gender,
-        string? translation)
-    {
-        Id = Guid.NewGuid();
-        LanguageId = languageId;
-        GenderId = genderId;
-        Name = name;
-        Transcription = transcription;
-
-        if (gender is not null)
-        {
-            GenderMasculine = gender.Masculine;
-            GenderFeminine = gender.Feminine;
-            GenderNeuter = gender.Neuter;
-        }
-
-        Translation = translation;
-
-        var utcNow = DateTime.UtcNow; // TODO Use ISystemClock
-        CreatedAt = utcNow;
-        UpdatedAt = utcNow;
-    }
-
     public Guid Id { get; private set; }
 
     public int LanguageId { get; private set; }
@@ -68,13 +40,22 @@ public class Word
             throw new InvalidOperationException();
         }
 
-        return new Word(
-            languageId,
-            genderId: 0,
-            name: name.Trim(),
-            transcription: string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
-            gender,
-            translation: translation.Trim());
+        var utcNow = DateTime.UtcNow; // TODO Use ISystemClock
+
+        return new Word
+        {
+            Id = Guid.NewGuid(),
+            LanguageId = languageId,
+            GenderId = 0,
+            Name = name.Trim(),
+            Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
+            GenderMasculine = gender?.Masculine ?? false,
+            GenderFeminine = gender?.Feminine ?? false,
+            GenderNeuter = gender?.Neuter ?? false,
+            Translation = translation.Trim(),
+            CreatedAt = utcNow,
+            UpdatedAt = utcNow,
+        };
     }
 
     public static UnitResult<Error> CanCreate(int? languageId, string? name, string? transcription, string? translation)
@@ -118,7 +99,7 @@ public class Word
         return UnitResult.Success<Error>();
     }
 
-    public void Update(string? transcription, string translation)
+    public void Update(string? transcription, WordGender? gender, string translation)
     {
         var unitResult = CanUpdate(transcription, translation);
         if (unitResult.IsFailure)
@@ -127,6 +108,9 @@ public class Word
         }
 
         Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim();
+        GenderMasculine = gender?.Masculine ?? false;
+        GenderFeminine = gender?.Feminine ?? false;
+        GenderNeuter = gender?.Neuter ?? false;
         Translation = translation.Trim();
         UpdatedAt = DateTime.UtcNow; // TODO Use ISystemClock
     }

@@ -4,5 +4,5 @@ using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.UpdateWord;
 
-public record UpdateWordCommand(Guid Id, string Name, string? Transcription, string Translation)
+public record UpdateWordCommand(Guid Id, string Name, string? Transcription, WordGender? Gender, string Translation)
     : IRequest<UnitResult<Error>>;

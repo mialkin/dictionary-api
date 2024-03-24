@@ -2,6 +2,7 @@ using CSharpFunctionalExtensions;
 using Dictionary.Api.Domain;
 using Dictionary.Api.Domain.Entities;
 using Dictionary.Api.Infrastructure.Interfaces.Database;
+using Mapster;
 using MediatR;
 
 namespace Dictionary.Api.UseCases.Words.Commands.UpdateWord;
@@ -23,7 +24,7 @@ internal class UpdateWordCommandHandler(IDatabaseContext databaseContext)
             return unitResult.Error;
         }
 
-        word.Update(request.Transcription, request.Translation);
+        word.Update(request.Transcription, request.Gender.Adapt<Domain.ValueObjects.WordGender>(), request.Translation);
         await databaseContext.SaveChangesAsync(cancellationToken);
 
         return UnitResult.Success<Error>();
