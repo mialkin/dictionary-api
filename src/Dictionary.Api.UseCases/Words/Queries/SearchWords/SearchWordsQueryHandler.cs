@@ -35,8 +35,8 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
                 x.Transcription,
                 new WordGender(x.GenderMasculine, x.GenderFeminine, x.GenderNeuter),
                 x.Translation,
-                x.CreatedAt,
-                x.UpdatedAt))
+                x.UpdatedAt,
+                x.CreatedAt))
             .Take(50) // TODO Move to specification and reuse across different methods?
             .ToListAsync(cancellationToken);
 

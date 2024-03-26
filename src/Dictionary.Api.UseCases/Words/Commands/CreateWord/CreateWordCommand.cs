@@ -8,6 +8,6 @@ public record CreateWordCommand(
     int LanguageId,
     string Name,
     string? Transcription,
-    WordGender? Gender,
+    WordGender Gender,
     string Translation)
     : IRequest<Result<CreateWordDto, Error>>;

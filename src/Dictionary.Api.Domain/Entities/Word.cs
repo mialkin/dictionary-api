@@ -15,23 +15,23 @@ public class Word
 
     public string? Transcription { get; private set; }
 
-    public string Translation { get; private set; }
-
     public bool GenderMasculine { get; private set; }
 
     public bool GenderFeminine { get; private set; }
 
     public bool GenderNeuter { get; private set; }
 
-    public DateTime CreatedAt { get; private set; }
+    public string Translation { get; private set; }
 
     public DateTime UpdatedAt { get; private set; }
+
+    public DateTime CreatedAt { get; private set; }
 
     public static Word Create(
         int languageId,
         string name,
         string? transcription,
-        WordGender? gender,
+        WordGender gender,
         string translation)
     {
         var unitResult = CanCreate(languageId, name, transcription, translation);
@@ -49,12 +49,12 @@ public class Word
             GenderId = 0,
             Name = name.Trim(),
             Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim(),
-            GenderMasculine = gender?.Masculine ?? false,
-            GenderFeminine = gender?.Feminine ?? false,
-            GenderNeuter = gender?.Neuter ?? false,
+            GenderMasculine = gender.Masculine,
+            GenderFeminine = gender.Feminine,
+            GenderNeuter = gender.Neuter,
             Translation = translation.Trim(),
-            CreatedAt = utcNow,
             UpdatedAt = utcNow,
+            CreatedAt = utcNow
         };
     }
 
@@ -99,7 +99,7 @@ public class Word
         return UnitResult.Success<Error>();
     }
 
-    public void Update(string? transcription, WordGender? gender, string translation)
+    public void Update(string? transcription, WordGender gender, string translation)
     {
         var unitResult = CanUpdate(transcription, translation);
         if (unitResult.IsFailure)
@@ -108,14 +108,9 @@ public class Word
         }
 
         Transcription = string.IsNullOrWhiteSpace(transcription) ? null : transcription.Trim();
-
-        if (gender is not null)
-        {
-            GenderMasculine = gender.Masculine;
-            GenderFeminine = gender.Feminine;
-            GenderNeuter = gender.Neuter;
-        }
-
+        GenderMasculine = gender.Masculine;
+        GenderFeminine = gender.Feminine;
+        GenderNeuter = gender.Neuter;
         Translation = translation.Trim();
         UpdatedAt = DateTime.UtcNow; // TODO Use ISystemClock
     }

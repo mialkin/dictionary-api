@@ -31,8 +31,8 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
             word.Transcription,
             new WordGender(word.GenderMasculine, word.GenderFeminine, word.GenderNeuter),
             word.Translation,
-            word.CreatedAt,
-            word.UpdatedAt);
+            word.UpdatedAt,
+            word.CreatedAt);
 
         return Maybe.From(result);
     }

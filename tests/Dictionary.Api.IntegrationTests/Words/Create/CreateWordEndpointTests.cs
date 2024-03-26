@@ -16,7 +16,7 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
 {
     [Theory]
     [AutoData]
-    public async Task Save_well_formed_word(string name, string? transcription, WordGender? gender, string translation)
+    public async Task Save_well_formed_word(string name, string? transcription, WordGender gender, string translation)
     {
         // Arrange
         var client = factory.CreateClient();
@@ -44,7 +44,7 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     public async Task Forbid_to_save_word_with_empty_name(
         string name,
         string? transcription,
-        WordGender? gender,
+        WordGender gender,
         string translation)
     {
         // Arrange
@@ -67,7 +67,7 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
     public async Task Save_empty_transcription_as_null(
         string transcription,
         string name,
-        WordGender? gender,
+        WordGender gender,
         string translation)
     {
         // Arrange
@@ -97,7 +97,7 @@ public class CreateWordEndpointTests(WordEndpointsWebApplicationFactory<Program>
         string translation,
         string name,
         string? transcription,
-        WordGender? gender)
+        WordGender gender)
     {
         // Arrange
         var client = factory.CreateClient();

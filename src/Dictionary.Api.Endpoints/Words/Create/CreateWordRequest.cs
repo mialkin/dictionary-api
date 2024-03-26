@@ -4,5 +4,5 @@ public record CreateWordRequest(
     int LanguageId,
     string Name,
     string? Transcription,
-    WordGender? Gender,
+    WordGender Gender,
     string Translation);

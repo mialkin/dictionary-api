@@ -10,8 +10,5 @@ public class WordEntityTypeConfiguration : IEntityTypeConfiguration<Word>
     {
         builder.HasKey(x => x.Id);
         builder.HasIndex(x => new { x.LanguageId, x.Name }).IsUnique(); // TODO Add UserId uniqueness
-        builder.Property(x => x.GenderMasculine).HasDefaultValue(false);
-        builder.Property(x => x.GenderFeminine).HasDefaultValue(false);
-        builder.Property(x => x.GenderNeuter).HasDefaultValue(false);
     }
 }
