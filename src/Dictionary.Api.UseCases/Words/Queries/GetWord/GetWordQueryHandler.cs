@@ -29,7 +29,7 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
             word.GenderId,
             word.Name,
             word.Transcription,
-            WordGender.Create(word),
+            new WordGender(word.GenderMasculine, word.GenderFeminine, word.GenderNeuter),
             word.Translation,
             word.CreatedAt,
             word.UpdatedAt);

@@ -33,7 +33,7 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
                 x.GenderId,
                 x.Name,
                 x.Transcription,
-                WordGender.Create(x),
+                new WordGender(x.GenderMasculine, x.GenderFeminine, x.GenderNeuter),
                 x.Translation,
                 x.CreatedAt,
                 x.UpdatedAt))
