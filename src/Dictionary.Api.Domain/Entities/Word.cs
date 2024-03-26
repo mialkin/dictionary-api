@@ -15,7 +15,7 @@ public class Word
 
     public string? Transcription { get; private set; }
 
-    public string? Translation { get; private set; }
+    public string Translation { get; private set; }
 
     public bool GenderMasculine { get; private set; }
 

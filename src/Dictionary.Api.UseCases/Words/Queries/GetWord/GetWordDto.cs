@@ -5,7 +5,8 @@ public record GetWordDto(
     int LanguageId,
     int GenderId,
     string Name,
-    string? Translation,
     string? Transcription,
+    WordGender? Gender,
+    string Translation,
     DateTime CreatedAt,
     DateTime? UpdatedAt);

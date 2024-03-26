@@ -28,8 +28,9 @@ internal class GetWordQueryHandler(IReadOnlyDatabaseContext readOnlyDatabaseCont
             word.LanguageId,
             word.GenderId,
             word.Name,
-            word.Translation,
             word.Transcription,
+            WordGender.Create(word),
+            word.Translation,
             word.CreatedAt,
             word.UpdatedAt);
 
