@@ -11,7 +11,7 @@ internal class SearchWordsQueryHandler(IReadOnlyDatabaseContext readOnlyDatabase
         SearchWordsQuery request,
         CancellationToken cancellationToken)
     {
-        // TODO Use Elasticsearch for storing words and translations?
+        // TODO Use Elasticsearch for storing words and translations? Or use Postgres sharding?
         var queryable = readOnlyDatabaseContext.Words.Where(x => x.LanguageId == request.LanguageId);
 
         if (!string.IsNullOrWhiteSpace(request.Query))
