@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="EntityFrameworkCore.Exceptions.Common" Version="8.1.0" />
+    <PackageReference Include="EntityFrameworkCore.Exceptions.Common" Version="8.1.2" />
     <PackageReference Include="Mapster" Version="7.4.0" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
+    <PackageReference Include="MediatR" Version="12.3.0" />
   </ItemGroup>
 
   <ItemGroup>
