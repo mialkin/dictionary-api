@@ -16,7 +16,7 @@ public class WordEndpointsWebApplicationFactory<TEntryPoint> : WebApplicationFac
 
         builder.ConfigureTestServices(services =>
         {
-            ServiceCollectionServiceExtensions.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>(services);
+            services.AddSingleton<IPolicyEvaluator, FakePolicyEvaluator>();
         });
     }
 }
