@@ -50,8 +50,6 @@ application.UseRouting();
 application.UseAuthentication();
 application.UseAuthorization();
 
-application.UseSerilogRequestLogging();
-
 application.UseSwagger();
 application.UseSwaggerUI(options =>
 {
